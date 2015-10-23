@@ -10,16 +10,16 @@ if [[ $i != "process.sh" ]]; then
     for j in *.au ; do
       NAME=$(echo $j | cut -f 1-2 -d '.')
       echo $NAME
-      sox -r 22050 $j "$NAME"_clip1.au trim 0 3
-      sox -r 22050 $j "$NAME"_clip2.au trim 3 3
-      sox -r 22050 $j "$NAME"_clip3.au trim 6 3
-      sox -r 22050 $j "$NAME"_clip4.au trim 9 3
-      sox -r 22050 $j "$NAME"_clip5.au trim 12 3
-      sox -r 22050 $j "$NAME"_clip6.au trim 15 3
-      sox -r 22050 $j "$NAME"_clip7.au trim 18 3
-      sox -r 22050 $j "$NAME"_clip8.au trim 21 3
-      sox -r 22050 $j "$NAME"_clip9.au trim 24 3
-      sox -r 22050 $j "$NAME"_clip10.au trim 27 3
+      sox -r 22050 $j "$NAME"_clip1.wav trim 0 3
+      sox -r 22050 $j "$NAME"_clip2.wav trim 3 3
+      sox -r 22050 $j "$NAME"_clip3.wav trim 6 3
+      sox -r 22050 $j "$NAME"_clip4.wav trim 9 3
+      sox -r 22050 $j "$NAME"_clip5.wav trim 12 3
+      sox -r 22050 $j "$NAME"_clip6.wav trim 15 3
+      sox -r 22050 $j "$NAME"_clip7.wav trim 18 3
+      sox -r 22050 $j "$NAME"_clip8.wav trim 21 3
+      sox -r 22050 $j "$NAME"_clip9.wav trim 24 3
+      sox -r 22050 $j "$NAME"_clip10.wav trim 27 3
     done
     cd ..
 fi
