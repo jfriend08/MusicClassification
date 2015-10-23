@@ -2,7 +2,7 @@
 ## Procedure
 * Download [GTZAN](http://marsyasweb.appspot.com/download/data_sets/) dataset
 * Pre-process data, including re-sampling and cliping
-..*mv process.sh under genres and will auto perform pre-process
+* *mv process.sh under genres and will auto perform pre-process
 ..So each music which all with 30s length will be trim for 10 clip, each clip is 3s, sampling rate is 22050 Hz
 ```bash
 sox -r 22050 $j "$NAME"_clip1.au trim 0 3
