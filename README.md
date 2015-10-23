@@ -10,3 +10,7 @@ sox -r 22050 $j "$NAME"_clip3.au trim 6 3
 ...
 ```
 * Pre-processed data can be downloaded [HERE](https://onedrive.live.com/redir.aspx?cid=a134a87f7a3dd922&resid=A134A87F7A3DD922!347&parId=A134A87F7A3DD922!346&authkey=!ACiZA1wDdlb_fSk&ithint=file%2czip)
+
+## Materialize data
+* Need scipy installed
+* pythonize.py needs to be in the same directory of `genres_processed`
