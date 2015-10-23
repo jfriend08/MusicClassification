@@ -3,7 +3,7 @@
 1. Download [GTZAN](http://marsyasweb.appspot.com/download/data_sets/) dataset
 2. Pre-process data, including re-sampling and cliping
 ..*mv process.sh under genres and will auto perform the following pre-process
-```bash
+..```bash
 sox -r 22050 $j "$NAME"_clip1.au trim 0 3
 sox -r 22050 $j "$NAME"_clip2.au trim 3 3
 sox -r 22050 $j "$NAME"_clip3.au trim 6 3
