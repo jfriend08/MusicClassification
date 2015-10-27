@@ -14,3 +14,10 @@ sox -r 22050 $j "$NAME"_clip3.au trim 6 3
 ## Materialize data
 * Need scipy installed
 * pythonize.py needs to be in the same directory of `genres_processed`
+
+## Mel Filter Bank
+* Package is downloaded [HERE](https://github.com/SiggiGue/pyfilterbank)
+* Make sure numpy is imported in hpc environment
+```
+module load python/intel/2.7.6
+```
