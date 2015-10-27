@@ -5,11 +5,6 @@ import cPickle as pickle
 import scipy.io.wavfile as wav
 from pylab import plt
 
-''' python_speech_features '''
-sys.path.append('./python_speech_features')
-from features import mfcc
-from features import logfbank
-
 ''' pyfilterbank '''
 sys.path.append('./pyfilterbank/pyfilterbank')
 import melbank
@@ -47,7 +42,7 @@ def generate_melbank():
   plt.title('Mel Matrix')
   plt.tight_layout()
 
-  # plt.show()
+  plt.show()
   return melmat, (melfreq, fftfreq)
 
 

@@ -17,7 +17,14 @@ sox -r 22050 $j "$NAME"_clip3.au trim 6 3
 
 ## Mel Filter Bank
 * Package is downloaded [HERE](https://github.com/SiggiGue/pyfilterbank)
-* Make sure numpy is imported in hpc environment
+* Make sure numpy is imported in hpc environment, and make sure ssh -X into hpc
 ```
 module load python/intel/2.7.6
 ```
+* Run
+```
+python signalScattering.py
+```
+* You will see figures generated
+Inline-style: 
+![alt text](https://github.com/jfriend08/MusicClassification/blob/dev/figures/Mel_Matrix.png "Mel_Matrix")
