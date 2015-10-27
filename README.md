@@ -26,5 +26,5 @@ module load python/intel/2.7.6
 python signalScattering.py
 ```
 * You will see figures generated
-Inline-style: 
 ![alt text](https://github.com/jfriend08/MusicClassification/blob/dev/figures/Mel_Matrix.png "Mel_Matrix")
+![alt text](https://github.com/jfriend08/MusicClassification/blob/dev/figures/mel_frequency_bank.png "mel_frequency_bank")
