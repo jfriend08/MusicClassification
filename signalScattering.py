@@ -41,14 +41,45 @@ def generate_melbank():
   plt.axis('tight')
   plt.title('Mel Matrix')
   plt.tight_layout()
+  # plt.show()
 
-  plt.show()
   return melmat, (melfreq, fftfreq)
 
+def plotBeforeAfterFilter(originalS, myFilter, filteredS):
+  fig, (ax_orig, ax_win, ax_filt) = plt.subplots(3, 1, sharex=True)
+  ax_orig.plot(originalS)
+  ax_orig.set_title('Original pulse')
+  ax_orig.margins(0, 0.1)
+  ax_win.plot(myFilter)
+  ax_win.set_title('Filter impulse response')
+  ax_win.margins(0, 0.1)
+  ax_filt.plot(filteredS)
+  ax_filt.set_title('Filtered signal')
+  ax_filt.margins(0, 0.1)
+  fig.tight_layout()
+  fig.show()
+
+def convolve(arrays, melBank, genera):
+  x = []
+  m = np.asmatrix(np.array(x))
+  for eachClip in arrays:
+    result = np.convolve(eachClip, melBank)
+    x.append(result)
+    m = np.asmatrix(np.array(x))
+    plotBeforeAfterFilter(eachClip, melBank, result)
+  fig, ax = plt.subplots()
+  ax.matshow(m)
+  plt.axis('equal')
+  plt.axis('tight')
+  plt.title(genera)
+  plt.tight_layout()
+  plt.show()
 
 
 if __name__ == '__main__':
   melmat, (melfreq, fftfreq) = generate_melbank()
-  print melfreq
-  print fftfreq
-  print melmat, len(melmat), len(melmat[0])
+
+  samples = pickle.load( open( "./data/data.in", "rb" ) )
+  for key in samples.keys():
+    print "now process", key, "song1"
+    convolve(samples[key][0], melmat[0], key)
