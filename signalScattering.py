@@ -139,6 +139,17 @@ def scattering(song, melmat_time):
   return song
 
 def scatteringHandler(melmat_time, samples_small):
+  '''
+  @INPUT:
+  melmat_time: mel-frequency bank in time domain. list of list
+  samples_small: map of list of list of list. key is the genere, value is list songs, each song has list of clips
+  @RETURN:
+  each song doesn't contain list of clips anymore, but the scattered results with convoluted with lowpass.
+  structure still map of list of list of list
+
+  Before: length for this song 10
+  After: length for this song 790
+  '''
   for genere in samples_small.keys():
     samples = samples_small[genere];
     for song in samples:
