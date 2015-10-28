@@ -14,3 +14,17 @@ sox -r 22050 $j "$NAME"_clip3.au trim 6 3
 ## Materialize data
 * Need scipy installed
 * pythonize.py needs to be in the same directory of `genres_processed`
+
+## Mel Filter Bank
+* Package is downloaded [HERE](https://github.com/SiggiGue/pyfilterbank)
+* Make sure numpy is imported in hpc environment, and make sure ssh -X into hpc
+```
+module load python/intel/2.7.6
+```
+* Run
+```
+python signalScattering.py
+```
+* You will see figures generated
+![alt text](https://github.com/jfriend08/MusicClassification/blob/dev/figures/Mel_Matrix.png "Mel_Matrix")
+![alt text](https://github.com/jfriend08/MusicClassification/blob/dev/figures/mel_frequency_bank.png "mel_frequency_bank")

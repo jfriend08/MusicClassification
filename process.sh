@@ -42,3 +42,5 @@ if [[ $i != "process.sh" ]]; then
 fi
 done
 wait
+
+
