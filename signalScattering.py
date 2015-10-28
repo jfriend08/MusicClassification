@@ -171,7 +171,7 @@ if __name__ == '__main__':
   '''Example of performing lowpass on given signal'''
   y = butter_lowpass_filter(samples_small['classical'][0][0], 50, 22050, 6)
 
-
+  '''samples_small_scattered will be the scattered result from samples_small'''
   samples_small_scattered = scatteringHandler(melmat_time, samples_small)
   o = open('./data/data_scattered.in', 'w')
   pickle.dump(samples_small_scattered, o)
