@@ -28,3 +28,6 @@ python signalScattering.py
 * You will see figures generated
 ![alt text](https://github.com/jfriend08/MusicClassification/blob/dev/figures/Mel_Matrix.png "Mel_Matrix")
 ![alt text](https://github.com/jfriend08/MusicClassification/blob/dev/figures/mel_frequency_bank.png "mel_frequency_bank")
+* Low-pass filter (order of 6) will be designed by scipy.signal.butter, and filtered by scipy.signal.lfilter
+⋅⋅⋅Here is an example of on of classical clip being filtered by 50Hz low-pass
+![alt text](https://github.com/jfriend08/MusicClassification/blob/dev/figures/FilterFigure_classical.png "FilterFigure_classical")
