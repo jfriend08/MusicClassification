@@ -145,7 +145,10 @@ def scattering(song, melmat_time):
   print "After: length for this song", len(song)
   return song
 
-def scatteringHandler(melmat_time, samples):
+def shortTermEnergy(frame):
+  return sum( [ abs(x)**2 for x in frame ] ) / len(frame)
+
+def scatteringHandler(melmat_time, samples, numSongs):
   '''
   @INPUT:
   melmat_time: mel-frequency bank in time domain. list of list
@@ -158,13 +161,17 @@ def scatteringHandler(melmat_time, samples):
   After: length for this song 790
   '''
   for genere in samples.keys():
-    print "genere", genere
     songs = samples[genere]
-    for song_idx in xrange(100):
+    for song_idx in xrange(numSongs):
       song = songs[song_idx]
       result = scattering(song, melmat_time)
-      songs[song_idx] = result
-      # print "samples[song_idx]", samples[song_idx]
+      energy_results = map(shortTermEnergy, result)
+      # print "energy_result", energy_results
+      # filename = "./data/"+genere+"_song"+str(song_idx)+"_Scattered.in"
+      # o = open(filename, 'w')
+      # pickle.dump(energy_results, o)
+      # o.close()
+      songs[song_idx] = energy_results
   return samples
 
 
@@ -184,8 +191,9 @@ if __name__ == '__main__':
   y = butter_lowpass_filter(samples['classical'][0][0], 50, 22050, 6)
 
   '''samples_scattered will be the scattered result (plus lowpass filtered) from samples'''
-  samples_scattered = scatteringHandler(melmat_time, samples)
-  o = open('./data/allData_scattered_lowPassed.in', 'w')
+  # scatteringHandler(melmat_time, samples)
+  samples_scattered = scatteringHandler(melmat_time, samples, 100)
+  o = open('./data/AllData_scattered_lowPassed_energy.in', 'w')
   pickle.dump(samples_scattered, o)
   o.close()
 
