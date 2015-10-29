@@ -32,3 +32,49 @@ generate_melbank(0, 6000)
 ```
 ![alt text](https://github.com/jfriend08/MusicClassification/blob/dev2/baseLineReport/figures/Mel_Matrix.png "Mel_Matrix")
 ![alt text](https://github.com/jfriend08/MusicClassification/blob/dev2/baseLineReport/figures/mel_frequency_bank.png "mel_frequency_bank")
+
+
+###Effect of convolution
+
+```python
+def plotBeforeAfterFilter(originalS, myFilter, myFilter_time, filteredS, genere, filter_idx):
+  fig, (ax_orig, ax_win, ax_winT, ax_filt) = plt.subplots(4, 1, sharex=True)
+  ax_orig.plot(originalS)
+  ax_orig.set_title('Original pulse')
+  ax_orig.margins(0, 0.1)
+  ax_win.plot(myFilter)
+  ax_win.set_title('str(filter_idx)'+' Filter impulse response--FrequencyDomain')
+  ax_win.margins(0, 0.1)
+  ax_winT.plot(myFilter_time)
+  ax_winT.set_title('str(filter_idx)'+' Filter impulse response--TimeDomain')
+  ax_winT.margins(0, 0.1)
+  ax_filt.plot(filteredS)
+  ax_filt.set_title('Filtered signal')
+  ax_filt.margins(0, 0.1)
+  fig.tight_layout()
+
+def convolve(arrays, melBank, genere, filter_idx):
+  x = []
+  melBank_time = np.fft.ifft(melBank) #need to transform melBank to time domain
+  for eachClip in arrays:
+    result = np.convolve(eachClip, melBank_time)
+    x.append(result)
+    plotBeforeAfterFilter(eachClip, melBank, melBank_time, result, genere, filter_idx)
+
+  m = np.asmatrix(np.array(x))
+  fig, ax = plt.subplots()
+  ax.matshow(m.real) #each element has imaginary part. So just plot real part
+  plt.axis('equal')
+  plt.axis('tight')
+  plt.title(genere)
+  plt.tight_layout()
+  plt.show()
+
+for key in samples.keys():
+  print "now process", key, "song1"
+  for eachFilter_idx in xrange(len(melmat)):
+    eachFilter = melmat[eachFilter_idx]
+    convolve(samples[key][0], eachFilter, key, eachFilter_idx)
+```
+![alt text](https://github.com/jfriend08/MusicClassification/blob/dev2/baseLineReport/figures/FilterFigure_Filter11disco.png "FilterFigure_Filter11disco")
+![alt text](https://github.com/jfriend08/MusicClassification/blob/dev2/baseLineReport/figures/Convolution_Filter11disco.png "Convolution_Filter11disco")
