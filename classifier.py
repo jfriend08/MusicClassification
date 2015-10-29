@@ -8,27 +8,18 @@ try:
 except:
   import pickle
 
-SOURCE_DIR = 'data/scatteredInvidual'
+SOURCE_DIR = 'data/Data_scattered_lowPassed_energy.in'
 
 def load_songs():
   path = os.path.join(os.getcwd(), SOURCE_DIR)
-  fileNames = os.listdir(path)
-  songs = {}
-
-  for f in fileNames:
-    genre = f.split('_')[0]
-    input = open(os.path.join(path, f), 'r')
-    vector = np.asarray(pickle.load(input), dtype=np.float64)
-    try:
-      songs[genre].append(vector)
-    except:
-      songs[genre] = [vector]
-    input.close()
+  input = open(path, 'r')
+  songs = pickle.load(input)
+  input.close()
 
   X, y = [], []
   count = 0
   for genre in songs.keys():
-    for i in xrange(len(songs[genre])):
+    for i in songs[genre].keys():
       X.append(songs[genre][i])
       y.append(count)
     count += 1
@@ -41,7 +32,7 @@ def sample_preprocessing(X, y):
   X = minMaxScaler.fit_transform(X, y)
 
   permutation = rng.permutation(len(X))
-  return train_test_split(X[permutation], y[permutation], train_size=0.9, random_state=0)
+  return train_test_split(X[permutation], y[permutation], train_size=0.5, random_state=0)
 
 if __name__ == '__main__':
   X, y = load_songs()
