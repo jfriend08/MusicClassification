@@ -1,7 +1,7 @@
 # Experiments
 ###Mel Filter Bank
-*This is the experiments to visualize the generated filter banks. As we tryig to reproduce our reference papers' result, we set up the lower and upper bound of filter frequency to 0 to 6000 Hz, being covered by 12 filters with 22050Hz sampling rate (same as sampling rate of each clip)
-*As you can see, it generated filter banks with triangular shaped bands ranged on the mel frequency scale
+* This is the experiments to visualize the generated filter banks. As we tryig to reproduce our reference papers' result, we set up the lower and upper bound of filter frequency to 0 to 6000 Hz, being covered by 12 filters with 22050Hz sampling rate (same as sampling rate of each clip)
+* As you can see, it generated filter banks with triangular shaped bands ranged on the mel frequency scale
 ```python
 def generate_melbank(lowBound=1000, highBound=8000):
   melmat, (melfreq, fftfreq) = melbank.compute_melmat(12, lowBound, highBound, num_fft_bands=4097, sample_rate=22050)
