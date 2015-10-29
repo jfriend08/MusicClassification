@@ -80,3 +80,8 @@ for key in samples.keys():
 ```
 ![alt text](https://github.com/jfriend08/MusicClassification/blob/dev2/baseLineReport/figures/FilterFigure_Filter11disco.png "FilterFigure_Filter11disco")
 ![alt text](https://github.com/jfriend08/MusicClassification/blob/dev2/baseLineReport/figures/Convolution_Filter11disco.png "Convolution_Filter11disco")
+
+###Effect of lowpass filter
+
+![alt text](https://github.com/jfriend08/MusicClassification/blob/dev2/baseLineReport/figures/lowPassButterFilter.png "lowPassButterFilter")
+![alt text](https://github.com/jfriend08/MusicClassification/blob/dev2/baseLineReport/figures/FilterFigure_classical.png "FilterFigure_classical")
