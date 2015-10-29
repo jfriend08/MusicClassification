@@ -35,7 +35,7 @@ generate_melbank(0, 6000)
 
 
 ###Effect of convolution
-
+* To check the effect of convolution, this is the experiment to visualize the signal before and after convolution of one certain filter bank. So here attached the last clip of first song in disco genere that being convoluted by last filter bank which the frequency roughly ranged from 4000 to 6000 Hz. By comparing the signal before and after convolution, we can see the signal magnitude droped from about 10,000 to 1,000, implying the convolution process plays a role in removing most of signal outside filter bank, and, therefore, the magnitude after convolution dropped.
 ```python
 def plotBeforeAfterFilter(originalS, myFilter, myFilter_time, filteredS, genere, filter_idx):
   fig, (ax_orig, ax_win, ax_winT, ax_filt) = plt.subplots(4, 1, sharex=True)
