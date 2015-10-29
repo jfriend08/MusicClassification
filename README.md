@@ -28,3 +28,28 @@ python signalScattering.py
 * You will see figures generated
 ![alt text](https://github.com/jfriend08/MusicClassification/blob/dev/figures/Mel_Matrix.png "Mel_Matrix")
 ![alt text](https://github.com/jfriend08/MusicClassification/blob/dev/figures/mel_frequency_bank.png "mel_frequency_bank")
+* Low-pass filter (order of 6) will be designed by scipy.signal.butter, and filtered by scipy.signal.lfilter.
+![alt text](https://github.com/jfriend08/MusicClassification/blob/dev/figures/lowPassButterFilter.png "lowPassButterFilter")
+* Low-pass filter (order of 6) will be designed by scipy.signal.butter, and filtered by scipy.signal.lfilter. Here is an example of on of classical clip being filtered by 50Hz low-pass
+![alt text](https://github.com/jfriend08/MusicClassification/blob/dev/figures/FilterFigure_classical.png "FilterFigure_classical")
+
+## Scattering Procedures
+```python
+if __name__ == '__main__':
+  '''Get my mel-frequency bank'''
+  melmat, (melfreq, fftfreq) = generate_melbank(0, 6000)
+
+  '''Transfrom mel-frequency to time domain'''
+  melmat_time = freq2timeDomain(melmat)
+
+  '''Read in data'''
+  # samples = pickle.load( open( "./data/data.in", "rb" ) )
+  samples_small = pickle.load( open( "./data/data_small.in", "rb" ) )
+
+  '''Example of performing lowpass on given signal'''
+  y = butter_lowpass_filter(samples_small['classical'][0][0], 50, 22050, 6)
+
+  '''samples_small_scattered will be the scattered result (plus lowpass filtered) from samples_small'''
+  samples_small_scattered = scatteringHandler(melmat_time, samples_small)
+
+```
