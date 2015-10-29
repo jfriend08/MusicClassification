@@ -84,6 +84,9 @@ for key in samples.keys():
 ###Effect of lowpass filter
 * To visualize the effect of lowpass filter, here we did experiment on two approaches. One is creating a signal wih noise append, and the other one is use the real clip from our sample, see what is the effect if the signal being low passed
 * From the first figure attached, we designed a order of 6 lowpassed filter with 8000Hz cutoff and 22050Hz sampling rate. Then we created a signal with 1.2Hz combined with 9000Hz noise appened. Since frequency of noise is very high, so we can see there are lots of high-frequent ripples along the curve of the 1.2Hz signal. Then, after lowpass filtered, signal became cleaners but can still noticed certain ripples. I think this is due to the lowpass will never being able to cutoff at 8000Hz sharp, but a curve gradually decrease to 0, therefore there are signal between 8000 to 9000 that still existed in the signal.
+* Since our mel-frequency banks ranged from 0 to 6000Hz, we decide to design a order of 6 lowpass filter with 6500Hz cutoff for our project
+* Then, we tested one the signal from one of the clip and performed lowpass. As we can see from the second attached figure, there are lots of high frequent signals being removed, and leave cleaner signal with lower magnitude
+
 ```python
 def butter_lowpass(cutoff, fs, order=5):
   nyq = 0.5 * fs
