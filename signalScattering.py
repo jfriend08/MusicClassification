@@ -42,6 +42,7 @@ def generate_melbank(f1=1000, f2=8000):
   # plt.axis('tight')
   # plt.title('Mel Matrix')
   # plt.tight_layout()
+  # plt.show()
 
   return melmat, (melfreq, fftfreq)
 
@@ -60,8 +61,8 @@ def plotBeforeAfterFilter(originalS, myFilter, myFilter_time, filteredS, genere,
   ax_filt.set_title('Filtered signal')
   ax_filt.margins(0, 0.1)
   fig.tight_layout()
-  filename = "./figures/filterBeforeAfter/FilterFigure_"+"Filter"+str(filter_idx)+genere+".png"
-  fig.savefig(filename)
+  # filename = "./figures/filterBeforeAfter/FilterFigure_"+"Filter"+str(filter_idx)+genere+".png"
+  # fig.savefig(filename)
   # fig.show()
 
 def convolve(arrays, melBank, genere, filter_idx):
@@ -70,18 +71,18 @@ def convolve(arrays, melBank, genere, filter_idx):
   for eachClip in arrays:
     result = np.convolve(eachClip, melBank_time)
     x.append(result)
-    # plotBeforeAfterFilter(eachClip, melBank, melBank_time, result, genere, filter_idx)
+    plotBeforeAfterFilter(eachClip, melBank, melBank_time, result, genere, filter_idx)
 
-  # m = np.asmatrix(np.array(x))
-  # fig, ax = plt.subplots()
-  # ax.matshow(m.real) #each element has imaginary part. So just plot real part
-  # plt.axis('equal')
-  # plt.axis('tight')
-  # plt.title(genere)
-  # plt.tight_layout()
+  m = np.asmatrix(np.array(x))
+  fig, ax = plt.subplots()
+  ax.matshow(m.real) #each element has imaginary part. So just plot real part
+  plt.axis('equal')
+  plt.axis('tight')
+  plt.title(genere)
+  plt.tight_layout()
   # filename = "./figures/convolution/Convolution_"+"Filter"+str(filter_idx)+genere+".png"
   # plt.savefig(filename)
-  # plt.show()
+  plt.show()
 def freq2timeDomain(melmat):
   result = []
   for melBank in melmat:
@@ -183,19 +184,25 @@ if __name__ == '__main__':
   melmat_time = freq2timeDomain(melmat)
 
   '''Read in data'''
-  samples = pickle.load( open( "./data/data.in", "rb" ) )
+  #samples = pickle.load( open( "./data/data.in", "rb" ) )
   # sampleSplit(samples, "data_small_correctFormat.in")
-  # samples = pickle.load( open( "./data/data_small_correctFormat.in", "rb" ) )
+  samples = pickle.load( open( "./data/data_small_correctFormat.in", "rb" ) )
 
   '''Example of performing lowpass on given signal'''
   y = butter_lowpass_filter(samples['classical'][0][0], 50, 22050, 6)
 
-  '''samples_scattered will be the scattered result (plus lowpass filtered) from samples'''
-  # scatteringHandler(melmat_time, samples)
-  samples_scattered = scatteringHandler(melmat_time, samples, 100)
-  o = open('./data/AllData_scattered_lowPassed_energy.in', 'w')
-  pickle.dump(samples_scattered, o)
-  o.close()
+  for key in samples.keys():
+    print "now process", key, "song1"
+    for eachFilter_idx in xrange(len(melmat)):
+      eachFilter = melmat[eachFilter_idx]
+      convolve(samples[key][0], eachFilter, key, eachFilter_idx)
+
+  # '''samples_scattered will be the scattered result (plus lowpass filtered) from samples'''
+  # # scatteringHandler(melmat_time, samples)
+  # samples_scattered = scatteringHandler(melmat_time, samples, 4)
+  # o = open('./data/AllData_scattered_lowPassed_energy.in', 'w')
+  # pickle.dump(samples_scattered, o)
+  # o.close()
 
 
 
