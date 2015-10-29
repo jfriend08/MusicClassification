@@ -30,5 +30,5 @@ def generate_melbank(lowBound=1000, highBound=8000):
 
 generate_melbank(0, 6000)
 ```
-![alt text](https://github.com/jfriend08/MusicClassification/blob/dev2/baseLineReport/figures/Mel_Matrix.png | width=100 "Mel_Matrix")
-![alt text](https://github.com/jfriend08/MusicClassification/blob/dev2/baseLineReport/figures/mel_frequency_bank.png | width=100 "mel_frequency_bank")
+![alt text](https://github.com/jfriend08/MusicClassification/blob/dev2/baseLineReport/figures/Mel_Matrix.png | width=100)
+![alt text](https://github.com/jfriend08/MusicClassification/blob/dev2/baseLineReport/figures/mel_frequency_bank.png | width=100)
