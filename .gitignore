@@ -4,3 +4,6 @@ data.in
 update.pbs
 .DS*
 ._*
+*.e*
+*.o*
+data_small_correctFormat.in

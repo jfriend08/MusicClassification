@@ -109,14 +109,21 @@ def butter_lowpass_filter(data, cutoff=6500, fs=22050, order=6):
   y = lfilter(b, a, data)
   return y
 
-def sampleSplit(samples, splitNum):
+def sampleSplit(samples, filename):
   result = {}
   for genere in samples.keys():
-    mylists = []
-    mylists.append(samples[genere][0])
-    mylists.append(samples[genere][1])
+    mylists = {}
+    mylists[0] = samples[genere][0]
+    mylists[1] = samples[genere][1]
+    mylists[2] = samples[genere][2]
+    mylists[3] = samples[genere][3]
+    # mylists.append(samples[genere][0])
+    # mylists.append(samples[genere][1])
     result[genere] = mylists
-  return result
+  filename = "./data/" + filename
+  o = open(filename, 'w')
+  pickle.dump(result, o)
+  o.close()
 
 def scattering(song, melmat_time):
   print "Start: scattering for current song"
@@ -138,11 +145,11 @@ def scattering(song, melmat_time):
   print "After: length for this song", len(song)
   return song
 
-def scatteringHandler(melmat_time, samples_small):
+def scatteringHandler(melmat_time, samples):
   '''
   @INPUT:
   melmat_time: mel-frequency bank in time domain. list of list
-  samples_small: map of list of list of list. key is the genere, value is list songs, each song has list of clips
+  samples: map of list of list of list. key is the genere, value is list songs, each song has list of clips
   @RETURN:
   each song doesn't contain list of clips anymore, but the scattered results with convoluted with lowpass.
   structure still map of list of list of list
@@ -150,11 +157,15 @@ def scatteringHandler(melmat_time, samples_small):
   Before: length for this song 10
   After: length for this song 790
   '''
-  for genere in samples_small.keys():
-    samples = samples_small[genere];
-    for song in samples:
-      song = scattering(song, melmat_time)
-  return samples_small
+  for genere in samples.keys():
+    print "genere", genere
+    songs = samples[genere]
+    for song_idx in xrange(100):
+      song = songs[song_idx]
+      result = scattering(song, melmat_time)
+      songs[song_idx] = result
+      # print "samples[song_idx]", samples[song_idx]
+  return samples
 
 
 if __name__ == '__main__':
@@ -165,32 +176,33 @@ if __name__ == '__main__':
   melmat_time = freq2timeDomain(melmat)
 
   '''Read in data'''
-  # samples = pickle.load( open( "./data/data.in", "rb" ) )
-  samples_small = pickle.load( open( "./data/data_small.in", "rb" ) )
+  samples = pickle.load( open( "./data/data.in", "rb" ) )
+  # sampleSplit(samples, "data_small_correctFormat.in")
+  # samples = pickle.load( open( "./data/data_small_correctFormat.in", "rb" ) )
 
   '''Example of performing lowpass on given signal'''
-  y = butter_lowpass_filter(samples_small['classical'][0][0], 50, 22050, 6)
+  y = butter_lowpass_filter(samples['classical'][0][0], 50, 22050, 6)
 
-  '''samples_small_scattered will be the scattered result from samples_small'''
-  samples_small_scattered = scatteringHandler(melmat_time, samples_small)
-  o = open('./data/data_scattered.in', 'w')
-  pickle.dump(samples_small_scattered, o)
+  '''samples_scattered will be the scattered result (plus lowpass filtered) from samples'''
+  samples_scattered = scatteringHandler(melmat_time, samples)
+  o = open('./data/allData_scattered_lowPassed.in', 'w')
+  pickle.dump(samples_scattered, o)
   o.close()
 
 
 
 
-  # for key in samples_small.keys():
+  # for key in samples.keys():
   #   print "now process", key, "song1"
   #   for eachFilter_idx in xrange(len(melmat)):
   #     eachFilter = melmat[eachFilter_idx]
-  #     convolve(samples_small[key][0], eachFilter, key, eachFilter_idx)
+  #     convolve(samples[key][0], eachFilter, key, eachFilter_idx)
 
-  # plotBeforeAfterFilter(samples_small['classical'][0][0], melmat[0], np.fft.ifft(melmat[0]), y, "classical")
+  # plotBeforeAfterFilter(samples['classical'][0][0], melmat[0], np.fft.ifft(melmat[0]), y, "classical")
 
   # plt.subplot(1, 1, 1)
-  # plt.plot(samples_small['classical'][0][0])
-  # # plt.plot(samples_small['classical'][0][0], 'b-', label='data')
+  # plt.plot(samples['classical'][0][0])
+  # # plt.plot(samples['classical'][0][0], 'b-', label='data')
   # plt.subplot(1, 1, 2)
   # plt.plot(y, 'g-', linewidth=2, label='filtered data')
   # plt.xlabel('Time [sec]')
