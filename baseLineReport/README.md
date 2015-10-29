@@ -82,6 +82,46 @@ for key in samples.keys():
 ![alt text](https://github.com/jfriend08/MusicClassification/blob/dev2/baseLineReport/figures/Convolution_Filter11disco.png "Convolution_Filter11disco")
 
 ###Effect of lowpass filter
+* To visualize the effect of lowpass filter, here we did experiment on two approaches. One is creating a signal wih noise append, and the other one is use the real clip from our sample, see what is the effect if the signal being low passed
+* From the first figure attached, we designed a order of 6 lowpassed filter with 8000Hz cutoff and 22050Hz sampling rate. Then we created a signal with 1.2Hz combined with 9000Hz noise appened. Since frequency of noise is very high, so we can see there are lots of high-frequent ripples along the curve of the 1.2Hz signal. Then, after lowpass filtered, signal became cleaners but can still noticed certain ripples. I think this is due to the lowpass will never being able to cutoff at 8000Hz sharp, but a curve gradually decrease to 0, therefore there are signal between 8000 to 9000 that still existed in the signal.
+```python
+def butter_lowpass(cutoff, fs, order=5):
+  nyq = 0.5 * fs
+  normal_cutoff = cutoff / nyq
+  b, a = butter(order, normal_cutoff, btype='low', analog=False)
+  return b, a
+
+def butter_lowpass_filter(data, cutoff, fs, order=5):
+  b, a = butter_lowpass(cutoff, fs, order=order)
+  y = lfilter(b, a, data)
+  return y
+
+order = 6
+fs = 22050       # sample rate, Hz
+cutoff = 8000  # desired cutoff frequency of the filter, Hz
+# Get the filter coefficients so we can check its frequency response.
+b, a = butter_lowpass(cutoff, fs, order)
+
+T = 5.0         # seconds
+n = int(T * fs) # total number of samples
+t = np.linspace(0, T, n, endpoint=False)
+# "Noisy" data.  We want to recover the 1.2 Hz signal from this.
+data = np.sin(1.2*2*np.pi*t) + 0.5*np.sin(9000*2*np.pi*t)
+
+# Filter the data, and plot both the original and filtered signals.
+y = butter_lowpass_filter(data, cutoff, fs, order)
+
+plt.subplot(2, 1, 2)
+plt.plot(t, data, 'b-', label='data')
+plt.plot(t, y, 'g-', linewidth=2, label='filtered data')
+plt.xlabel('Time [sec]')
+plt.grid()
+plt.legend()
+
+plt.subplots_adjust(hspace=0.35)
+plt.show()
+
+```
 
 ![alt text](https://github.com/jfriend08/MusicClassification/blob/dev2/baseLineReport/figures/lowPassButterFilter.png "lowPassButterFilter")
 ![alt text](https://github.com/jfriend08/MusicClassification/blob/dev2/baseLineReport/figures/FilterFigure_classical.png "FilterFigure_classical")
