@@ -128,3 +128,26 @@ plt.show()
 
 ![alt text](https://github.com/jfriend08/MusicClassification/blob/dev2/baseLineReport/figures/lowPassButterFilter.png "lowPassButterFilter")
 ![alt text](https://github.com/jfriend08/MusicClassification/blob/dev2/baseLineReport/figures/FilterFigure_classical.png "FilterFigure_classical")
+
+###Scattering procedures
+* To demonstrate the procedures of signal scattering in high-level point of view, here are the codes from signalScattering.py
+```python
+if __name__ == '__main__':
+  '''Get my mel-frequency bank'''
+  melmat, (melfreq, fftfreq) = generate_melbank(0, 6000)
+
+  '''Transfrom mel-frequency to time domain'''
+  melmat_time = freq2timeDomain(melmat)
+
+  '''Read in data'''
+  samples = pickle.load( open( "./data/data.in", "rb" ) )
+
+  '''Example of performing lowpass on given signal'''
+  y = butter_lowpass_filter(samples_small['classical'][0][0], 50, 22050, 6)
+
+  '''samples_small_scattered will be the scattered result (plus lowpass filtered) from samples_small'''
+  samples_small_scattered = scatteringHandler(melmat_time, samples_small)
+
+```
+
+
