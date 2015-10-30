@@ -110,21 +110,25 @@ def butter_lowpass_filter(data, cutoff=6500, fs=22050, order=6):
   y = lfilter(b, a, data)
   return y
 
-def sampleSplit(samples, filename):
-  result = {}
+def sampleSplit(samples, filename, numberSongs=100):
   for genere in samples.keys():
-    mylists = {}
-    mylists[0] = samples[genere][0]
-    mylists[1] = samples[genere][1]
-    mylists[2] = samples[genere][2]
-    mylists[3] = samples[genere][3]
-    # mylists.append(samples[genere][0])
-    # mylists.append(samples[genere][1])
-    result[genere] = mylists
-  filename = "./data/" + filename
-  o = open(filename, 'w')
-  pickle.dump(result, o)
-  o.close()
+    result = []
+    songs = samples[genere]
+    for idx in xrange(numberSongs):
+      song = songs[idx]
+      result.append(song)
+      # mylists = {}
+      # mylists[0] = samples[genere][0]
+      # mylists[1] = samples[genere][1]
+      # mylists[2] = samples[genere][2]
+      # mylists[3] = samples[genere][3]
+      # # mylists.append(samples[genere][0])
+      # # mylists.append(samples[genere][1])
+      # result[genere] = mylists
+    filename = "./data/" + genere + "_songs.in"
+    o = open(filename, 'w')
+    pickle.dump(result, o)
+    o.close()
 
 def scattering(song, melmat_time):
   print "Start: scattering for current song"
@@ -175,8 +179,20 @@ def scatteringHandler(melmat_time, samples, numSongs):
       songs[song_idx] = energy_results
   return samples
 
+def scatteringHandler2(melmat_time, songs):
+  for song_idx in xrange(len(songs)):
+    song = songs[song_idx]
+    result = scattering(song, melmat_time)
+    energy_results = map(shortTermEnergy, result)
+    songs[song_idx] = energy_results
+    # print songs[song_idx], len(songs[song_idx])
+  return songs
 
 if __name__ == '__main__':
+  arg_genere = sys.argv[1]
+  readin_filename = "./data/" + arg_genere+"_songs.in"
+  readout_filename = "./data/" + arg_genere+"_songs_scattered.in"
+
   '''Get my mel-frequency bank'''
   melmat, (melfreq, fftfreq) = generate_melbank(0, 6000)
 
@@ -184,24 +200,20 @@ if __name__ == '__main__':
   melmat_time = freq2timeDomain(melmat)
 
   '''Read in data'''
-  #samples = pickle.load( open( "./data/data.in", "rb" ) )
-  # sampleSplit(samples, "data_small_correctFormat.in")
-  samples = pickle.load( open( "./data/data_small_correctFormat.in", "rb" ) )
+  samples = pickle.load( open( "./data/data.in", "rb" ) )
+  sampleSplit(samples, "data_small_correctFormat.in", 100)
+  # # samples = pickle.load( open( "./data/data_small_correctFormat.in", "rb" ) )
+  # songs = pickle.load( open( readin_filename, "rb" ) )
 
-  '''Example of performing lowpass on given signal'''
-  y = butter_lowpass_filter(samples['classical'][0][0], 50, 22050, 6)
-
-  for key in samples.keys():
-    print "now process", key, "song1"
-    for eachFilter_idx in xrange(len(melmat)):
-      eachFilter = melmat[eachFilter_idx]
-      convolve(samples[key][0], eachFilter, key, eachFilter_idx)
+  # '''Example of performing lowpass on given signal'''
+  # # y = butter_lowpass_filter(samples['classical'][0][0], 50, 22050, 6)
 
   # '''samples_scattered will be the scattered result (plus lowpass filtered) from samples'''
-  # # scatteringHandler(melmat_time, samples)
-  # samples_scattered = scatteringHandler(melmat_time, samples, 4)
-  # o = open('./data/AllData_scattered_lowPassed_energy.in', 'w')
-  # pickle.dump(samples_scattered, o)
+  # # # scatteringHandler(melmat_time, samples)
+  # # samples_scattered = scatteringHandler(melmat_time, samples, 4)
+  # songs_scattered = scatteringHandler2(melmat_time, songs)
+  # o = open(readout_filename, 'w')
+  # pickle.dump(songs_scattered, o)
   # o.close()
 
 

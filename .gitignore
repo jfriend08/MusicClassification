@@ -8,3 +8,4 @@ update.pbs
 *.o*
 data_small_correctFormat.in
 .ipynb_checkpoints
+*_songs.in
