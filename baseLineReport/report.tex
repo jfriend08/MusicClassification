@@ -32,26 +32,37 @@
 \begin{document}
 \maketitle
 
-\begin{abstract}
-
-\end{abstract}
-
 \pagestyle{myheadings}
 \thispagestyle{plain}
 
 \section{Baseline approaches}
-For baseline approach, first of all, we download the GTZAN data set. It contains 10 different music generes, and 100 of 3 minutes musics in .au format per gerere, which is 1000 songs in toal and about 3GB for its data size. Then SOX was performed for data preprocessing that we sampling each songs with 22050Hz and divided it into 10 clips in .wav, each for 3 seconds. Therefore, each clip will have 66150 values representing music signal intensity within the 3 seconds window.
+For baseline approach, we use the same data set as the reference paper used, GTZAN data set.  We use SOX to sample at 22050Hz and partition data sets into intervals, each for 3 seconds.  Therefore, each clip will have 66150 values representing music signal intensity within the 3 seconds window.
 
-After data preprocessing, we read each wav file by scipy.io.wavfile and constructed all the clips into python pickle structure, that each keys is the genere, and the value are list of songs, and each song containing list of 10 clips of music signals.
+After data preprocessing, we read outputs and transfer into python readable files, so that we can use scipy tools on it.
 
-pyfilterbank package was used for mel-frequency bank generation. As trying to reproduce the method of our reference paper, we prepared 12 of the frequency banks covering signal from 0 to 6000 Hz range. Sampling rate for each bank is 22050Hz and they are triangular shaped. As each of the bank serves as a filter purpose that need to convoluted with each song's clip over time domain, numpy.fft.ifft was performed on each bank trying to transform each bank into time domain.
-
-As scattering method need to be convoluted with a lowpass filter at the end, we designed the lowpass filter by scipy.signal.butter for 6500 Hz cutoff frequency, 22050 Hz sampling rate, and in the order of 6. Then scipy.signal.lfilter was performed to filter the signal on frequency domain, which in other word, performing convolution with signal clips on time domain. For the convolution part during scattering, numpy.convolve was performed during eachtime of scattering process.
+Second approach is to use pyfilterbank packages for mel-frequency bank generation.  As trying to reproduce the method of our reference paper, we prepared 12 of the frequency banks covering signal from 0 to 6000 Hz range.  As scattering method need to be convoluted with a lowpass filter at the end, we designed the lowpass filter by scipy.signal.butter for 6500 Hz cutoff frequency, 22050 Hz sampling rate, and in the order of 6. Then scipy.signal.lfilter was performed to filter the signal on frequency domain, which in other word, performing convolution with signal clips on time domain. For the convolution part during scattering, numpy.convolve was performed during eachtime of scattering process.
 
 During scattering process, each clip in a song will produced 1 product at 0-ordered scattering, 12 products with each mel-frequency banks at 1-ordered scattering, and then the summation of 11 to 1 during 2-ordered scattering wich yield 66 products. Therefore, given total 10 clip per song and each clip will produced 79 products during scattering process, each song now will have 790 vectors of scattering-modified clips. As each clip contains 66150 values and this scattered song will genreate huge size of data which is not pratical for any machine with limited memory, therefore we performed energy conversion for each of the clip converting 790 signal vectors into 790 signal values.
 
-The performance for scaterring each of the song is very slow. Each song has to perform 1320 times of convolutions, 790 times of lowpass filtering, and then 790 times of energy conversion. Therefore approxmately each song will need 10 to 15 minutes for scattering process.
+\section{Software}
+\subsection{Data Preprocessing}
+\begin{remunerate}
+\item SOX is used to sampel source file at given frequency and help partition into clips with given interval.
+\item scipy.wavfile is used to help read wav file into numpy array.
+\end{remunerate}
+\subsection{Scattering}
+\begin{remunerate}
+\item pyfilterbank is used to generate frequency bank that we need to use to filter out unwanted signals.
+\item numpy is used to do necessary convolution.
+\end{remunerate}
+\subsection{Learning Algorithm}
+\begin{remunerate}
+\item scikit-learn.SVM is used as our baseline learning algorithm.  We use SVC algorithm with degree of 2 to classify samples.
+\end{remunerate}
 
+Our main difficulties is the performance.  The performance for scaterring each of the song is very slow. Each song has to perform 1320 times of convolutions, 790 times of lowpass filtering, and then 790 times of energy conversion. Therefore approxmately each song will need 10 to 15 minutes for scattering process.
+\section{Dataset}
+For baseline approach, we download the GTZAN data set. It contains 10 different music generes, and 100 of 3 minutes musics in .au format per gerere, which is 1000 songs in toal and about 3GB for its data size. Then SOX was performed for data preprocessing that we sampling each songs with 22050Hz and divided it into 10 clips in .wav, each for 3 seconds. Therefore, each clip will have 66150 values representing music signal intensity within the 3 seconds window.
 
 \begin{thebibliography}{10}
 \bibitem{fpf} {\sc Low pass filter by FFT convolution}, {\em http://www.dsprelated.com/freebooks/sasp/Example\_1\_Low\_Pass\_Filtering.html}
