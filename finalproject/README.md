@@ -19,6 +19,8 @@ python workbook.py 3 4000 0.3 #numDivide, k, batchSizeRatio
 * You may change the `python workbook.py 3 4000 0.3` to the proper parameter you like to test
 * Name the task according to the parameter setting `#PBS -N Run_3_4000_0.3`
 * Current test: Run_3_4000_0.3 will get `Exit_status=271` and error is `job 7119487 exceeded MEM usage hard limit (6581 > 5120)`
+* job `Run_1_100_0.3.o7119489` prediction is 0.49, time spent is 38mins
+* job `Run_3_500_0.3.o7119479` prediction is 0.48, time spent is 02:24:23
 ```
 qsub workPipeLine.pbs
 ```
