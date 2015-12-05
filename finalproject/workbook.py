@@ -15,7 +15,7 @@ batchSizeRatio = float(args.batchSizeRatio)
 
 print "--------------", "START preprocess", "--------------"
 pp = preprocess.preprocess()
-X, y = pp.getData("../../MusicClassification_prev/data/data.in", numDivide) #path, clip numDivide
+X, y = pp.getData("../data.in", numDivide) #path, clip numDivide
 # X, y = pp.getData("../serverTest/MusicClassification/data/data.in", 50000) #path, clip length
 
 (X_center, y_center), (X_classifier, y_classifier), (X_test, y_test) = pp.splitData(

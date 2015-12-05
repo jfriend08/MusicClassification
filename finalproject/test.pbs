@@ -13,6 +13,5 @@
 #PBS -o localhost:${PBS_O_WORKDIR}/${PBS_JOBNAME}.o${PBS_JOBID}
 
 cd /home/htw230/finalProject/finalproject
-module load librosa
-python workbook.py $n $k $b
+python test2.py $t
 exit 0;
