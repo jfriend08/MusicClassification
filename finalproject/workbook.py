@@ -1,10 +1,21 @@
 import preprocess
 import cProfile
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("numDivide", help="number of split of each clip. e.g. 3 then each clip will get 3 split, and you got 10*3=30 small clips for each song")
+parser.add_argument("k", help="number of centroids")
+parser.add_argument("batchSizeRatio", help="batch size ratio when finding centroids. If there are 100 point and you specify 0.1, then batch size will be 10")
+
+args = parser.parse_args()
+numDivide = args.numDivide
+k = args.k
+batchSizeRatio = args.batchSizeRatio
+
 
 print "--------------", "START preprocess", "--------------"
 pp = preprocess.preprocess()
-# X, y = pp.getData("../MusicClassification/data/data_small.in", 50000) #path, clip length
-X, y = pp.getData("../MusicClassification/data/data.in", 50000) #path, clip length
+X, y = pp.getData("../MusicClassification/data/data.in", numDivide) #path, clip numDivide
 # X, y = pp.getData("../serverTest/MusicClassification/data/data.in", 50000) #path, clip length
 
 (X_center, y_center), (X_classifier, y_classifier), (X_test, y_test) = pp.splitData(
@@ -14,26 +25,24 @@ print X_center.shape, X_classifier.shape, X_test.shape
 
 X_center_features = pp.featureExtraction(X_center) #includes MFCC and normalization
 print "X_center_features.shape", X_center_features.shape #Note: this just flatten everything
-print "--------------", "DONE preprocess", "--------------"
 
 
-print "--------------", "START MiniBatchKMeans", "--------------"
+print "\n--------------", "START MiniBatchKMeans", "--------------"
 from sklearn.cluster import MiniBatchKMeans
 n, dim = X_center_features.shape
-clf = MiniBatchKMeans(n_clusters=100, batch_size=int(n*0.1), max_iter=200).fit(X_center_features) #X : array-like, shape = [n_samples, n_features]
+clf = MiniBatchKMeans(n_clusters=k, batch_size=int(n*batchSizeRatio), max_iter=200).fit(X_center_features) #X : array-like, shape = [n_samples, n_features]
 centroids = clf.cluster_centers_
 print "centroids.shape", centroids.shape
-print "--------------", "DONE MiniBatchKMeans", "--------------"
 
 
-print "--------------", "START VLAD", "--------------"
+print "\n--------------", "START VLAD", "--------------"
 import vlad
 trainX_centerSubstract, trainy_centerSubstract = vlad.my_vlad(centroids, X_classifier, y_classifier)
 testX_centerSubstract, testy_centerSubstract = vlad.my_vlad(centroids, X_test, y_test)
 print trainX_centerSubstract.shape
-print "--------------", "DONE VLAD", "--------------"
 
-print "--------------", "START Grid Search", "--------------"
+
+print "\n--------------", "START Grid Search", "--------------"
 from sklearn.grid_search import GridSearchCV
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import MultinomialNB
@@ -42,9 +51,8 @@ param_grid = {'n_neighbors': np.arange(3, 30),'weights':('uniform', 'distance'),
 np.set_printoptions(suppress=True)
 grid_search = GridSearchCV(KNeighborsClassifier(), param_grid, verbose=3)
 grid_search.fit(trainX_centerSubstract, trainy_centerSubstract)
-print "--------------", "DONE Grid Search", "--------------"
 
 
 predict = grid_search.predict(testX_centerSubstract)
-print grid_search.score(testX_centerSubstract, testy_centerSubstract)
-print grid_search.best_params_
+print "Predict socre:", grid_search.score(testX_centerSubstract, testy_centerSubstract)
+print "Best params:", grid_search.best_params_

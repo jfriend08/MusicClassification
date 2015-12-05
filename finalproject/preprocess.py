@@ -44,7 +44,7 @@ class preprocess(object):
 
   def featureExtraction(self, X, transpose=True):
     def MFCC(signal, sr=22050):
-      return librosa.feature.mfcc(y=np.array(signal), sr=sr, n_mfcc=12)
+      return librosa.feature.mfcc(y=np.array(signal), sr=sr, n_mfcc=20)
 
     X = np.array([map(MFCC, song) for song in X])
     print "--> After MFCC X.shape", X.shape

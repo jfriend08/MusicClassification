@@ -42,7 +42,7 @@ def getData(path, **kwargs):
 
 def featureExtraction(X, transpose=True):
   def MFCC(signal, sr=22050):
-    return librosa.feature.mfcc(y=np.array(signal), sr=sr, n_mfcc=12)
+    return librosa.feature.mfcc(y=np.array(signal), sr=sr, n_mfcc=20)
 
   X = np.array([map(MFCC, song) for song in X])
   # X = np.array([[MFCC(clip) for clip in song] for song in X])
