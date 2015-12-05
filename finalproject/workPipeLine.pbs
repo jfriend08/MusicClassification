@@ -15,5 +15,4 @@
 cd /home/yss265/MusicClassification/finalproject
 module load librosa
 python workbook.py 1 100 0.3
-
 exit 0;
