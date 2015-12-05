@@ -2,7 +2,7 @@
 
 #PBS -V
 #PBS -S /bin/bash
-#PBS -N Run_3_2000_0.3
+#PBS -N Run_3_4000_0.3
 #PBS -l nodes=1:ppn=2
 #PBS -l walltime=15:00:00
 #PBS -l mem=10GB
@@ -12,8 +12,8 @@
 #PBS -e localhost:${PBS_O_WORKDIR}/${PBS_JOBNAME}.e${PBS_JOBID}
 #PBS -o localhost:${PBS_O_WORKDIR}/${PBS_JOBNAME}.o${PBS_JOBID}
 
-cd /home/yss265/finalProject
+cd /home/yss265/MusicClassification/finalproject
 module load librosa
-python workbook.py 3 2000 0.3
+python workbook.py 3 4000 0.3
 
 exit 0;

@@ -8,14 +8,14 @@ parser.add_argument("k", help="number of centroids")
 parser.add_argument("batchSizeRatio", help="batch size ratio when finding centroids. If there are 100 point and you specify 0.1, then batch size will be 10")
 
 args = parser.parse_args()
-numDivide = args.numDivide
-k = args.k
-batchSizeRatio = args.batchSizeRatio
+numDivide = int(args.numDivide)
+k = int(args.k)
+batchSizeRatio = float(args.batchSizeRatio)
 
 
 print "--------------", "START preprocess", "--------------"
 pp = preprocess.preprocess()
-X, y = pp.getData("../MusicClassification/data/data.in", numDivide) #path, clip numDivide
+X, y = pp.getData("../../MusicClassification_prev/data/data.in", numDivide) #path, clip numDivide
 # X, y = pp.getData("../serverTest/MusicClassification/data/data.in", 50000) #path, clip length
 
 (X_center, y_center), (X_classifier, y_classifier), (X_test, y_test) = pp.splitData(

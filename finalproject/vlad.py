@@ -65,7 +65,7 @@ def featureExtraction(X, transpose=True):
 
 def my_vlad(centers, X, y, transpose=True):
   def MFCC(signal, sr=22050):
-    return librosa.feature.mfcc(y=np.array(signal), sr=sr, n_mfcc=12)
+    return librosa.feature.mfcc(y=np.array(signal), sr=sr, n_mfcc=20)
 
   def getClosestDist(centers, x, returnIdx=False):
     min_dis = sys.float_info.max
