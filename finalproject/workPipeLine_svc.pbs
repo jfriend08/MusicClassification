@@ -1,0 +1,19 @@
+#!/bin/bash
+
+#PBS -V
+#PBS -S /bin/bash
+#PBS -N 2_100_0.1_0.0001_svc
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=168:00:00
+#PBS -l mem=4GB
+#PBS -q s48
+#PBS -M yss265@nyu.edu
+#PBS -m bea
+#PBS -e localhost:${PBS_O_WORKDIR}/${PBS_JOBNAME}.e${PBS_JOBID}
+#PBS -o localhost:${PBS_O_WORKDIR}/${PBS_JOBNAME}.o${PBS_JOBID}
+
+cd /home/yss265/MusicClassification/finalproject
+module load librosa
+python workbook_svc.py $n $k $b $C
+exit 0;
+

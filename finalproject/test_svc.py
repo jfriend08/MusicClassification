@@ -1,10 +1,12 @@
 import subprocess
+import numpy as np
 
-for numDivide in xrange(2, 3):
+for numDivide in xrange(1, 2):
   for k in xrange(100, 4000, 100):
-    for batch in xrange(1, 6):
-      for n_neighbors in xrange(6, 10):
-        jobName = '{0}_{1}_{2}_{3}'.format(numDivide, k, batch / 10.0, n_neighbors)
+    for batch in xrange(1, 2):
+      for C in np.arange(0.0001, 1, 1):
+        jobName = '{0}_{1}_{2}_{3}_svc'.format(numDivide, k, batch / 10.0, C)
+        # print jobName
         if k > 1000 and k < 2000:
           time = "10:00:00"
           ram = "6GB"
@@ -19,4 +21,4 @@ for numDivide in xrange(2, 3):
           ram = "5GB"
 
         l_cmd = "walltime=%s,mem=%s"%(time, ram)
-        subprocess.call('qsub workPipeLine.pbs -N {0} -l {1} -v n={2},k={3},b={4},nei={5}'.format(jobName, l_cmd, numDivide, k, batch / 10.0, n_neighbors), shell=True)
+        subprocess.call('qsub workPipeLine_svc.pbs -N {0} -l {1} -v n={2},k={3},b={4},C={5}'.format(jobName, l_cmd, numDivide, k, batch / 10.0, C), shell=True)
