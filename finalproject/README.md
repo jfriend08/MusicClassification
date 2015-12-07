@@ -22,7 +22,8 @@ python workbook.py 3 4000 0.3 #numDivide, k, batchSizeRatio
 * job `Run_1_100_0.3.o7119489` prediction is 0.49, time spent is 38mins
 * job `Run_3_500_0.3.o7119479` prediction is 0.48, time spent is 02:24:23
 * job `Run_3_1000_0.3.o7119482` prediction is 0.48, time spent is 04:37:22
-* job `Run_3_1500_0.3.o7119483` prediction is 0.48, time spent is 07:02:56
+* job `Run_3_1500_0.3.ot7119483` prediction is 0.48, time spent is 07:02:56
+* job `Run_3_2000_0.3.o7119484` prediction is 0.48, time spent is 09:18:48
 ```
 qsub workPipeLine.pbs
 ```

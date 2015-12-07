@@ -8,11 +8,10 @@
 #PBS -l mem=15GB
 #PBS -q s48
 #PBS -m bea
-#PBS -e localhost:${PBS_O_WORKDIR}/errors/${PBS_JOBNAME}
-#PBS -o localhost:${PBS_O_WORKDIR}/results/${PBS_JOBNAME}
+#PBS -e localhost:${PBS_O_WORKDIR}/${PBS_JOBNAME}.e${PBS_JOBID}
+#PBS -o localhost:${PBS_O_WORKDIR}/${PBS_JOBNAME}.o${PBS_JOBID}
 
 cd /scratch/htw230/MusicClassification/finalproject
 module load librosa
-
 python workbook.py $n $k $b $nei
 exit 0;
