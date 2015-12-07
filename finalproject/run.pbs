@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#PBS -V
+#PBS -S /bin/bash
+#PBS -N RUN_EXPERIEMENT
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=10:00:00
+#PBS -l mem=5GB
+#PBS -q s48
+#PBS -m bea
+#PBS -e localhost:${PBS_O_WORKDIR}/errors/${PBS_JOBNAME}
+#PBS -o localhost:${PBS_O_WORKDIR}/results/${PBS_JOBNAME}
+
+cd /scratch/htw230/MusicClassification/finalproject
+python test.py
+exit 0;
