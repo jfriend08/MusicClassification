@@ -3,16 +3,15 @@
 #PBS -V
 #PBS -S /bin/bash
 #PBS -N ${PBS_JOBNAME}
-#PBS -l nodes=1:ppn=2
-#PBS -l walltime=15:00:00
-#PBS -l mem=10GB
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=10:00:00
+#PBS -l mem=15GB
 #PBS -q s48
-#PBS -M htw230@nyu.edu
 #PBS -m bea
 #PBS -e localhost:${PBS_O_WORKDIR}/errors/${PBS_JOBNAME}
 #PBS -o localhost:${PBS_O_WORKDIR}/results/${PBS_JOBNAME}
 
-cd /home/htw230/finalProject/finalproject
+cd /scratch/htw230/MusicClassification/finalproject
 module load librosa
 
 python workbook.py $n $k $b $nei
