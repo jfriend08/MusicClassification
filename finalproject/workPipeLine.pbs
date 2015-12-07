@@ -2,18 +2,17 @@
 
 #PBS -V
 #PBS -S /bin/bash
-#PBS -N ${PBS_JOBNAME}
-#PBS -l nodes=1:ppn=2
-#PBS -l walltime=15:00:00
-#PBS -l mem=10GB
+#PBS -N Run_1_100_0.3
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=168:00:00
+#PBS -l mem=4GB
 #PBS -q s48
-#PBS -M htw230@nyu.edu
+#PBS -M yss265@nyu.edu
 #PBS -m bea
-#PBS -e localhost:${PBS_O_WORKDIR}/errors/${PBS_JOBNAME}
-#PBS -o localhost:${PBS_O_WORKDIR}/results/${PBS_JOBNAME}
+#PBS -e localhost:${PBS_O_WORKDIR}/${PBS_JOBNAME}.e${PBS_JOBID}
+#PBS -o localhost:${PBS_O_WORKDIR}/${PBS_JOBNAME}.o${PBS_JOBID}
 
-cd /home/htw230/finalProject/finalproject
+cd /home/yss265/MusicClassification/finalproject
 module load librosa
-
 python workbook.py $n $k $b $nei
 exit 0;
