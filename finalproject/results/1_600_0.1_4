@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /share/apps/librosa/0.4.1/lib/python2.7/site-packages/librosa-0.4.1-py2.7.egg/librosa/core/audio.py:37: UserWarning: Could not import scikits.samplerate. Falling back to scipy.signal
   warnings.warn('Could not import scikits.samplerate. '
 /share/apps/matplotlib/1.5.0/intel/lib/python2.7/site-packages/matplotlib-1.5.0-py2.7-linux-x86_64.egg/matplotlib/__init__.py:872: UserWarning: axes.color_cycle is deprecated and replaced with axes.prop_cycle; please use the latter.
@@ -8,3 +9,16 @@ Traceback (most recent call last):
   File "/scratch/htw230/MusicClassification/finalproject/preprocess.py", line 27, in getData
     samples = pickle.load( open( path, "rb" ) )
 IOError: [Errno 2] No such file or directory: '../data.in'
+=======
+X size/number of songs: 1000 Number of clips per song: 10 y size: 1000
+--> After MFCC X.shape (360, 10, 20, 98)
+--> X_train_flattened.shape (3600, 20, 98)
+--> After transpose X_train_flattened.shape (3600, 98, 20)
+vlad before X.shape (540, 10, 50000)
+vlad after X.shape (540, 10, 20, 98)
+After transpose Xt.shape (540, 10, 98, 20)
+vlad before X.shape (100, 10, 50000)
+vlad after X.shape (100, 10, 20, 98)
+After transpose Xt.shape (100, 10, 98, 20)
+0.45
+>>>>>>> 86d58a97ed0f85df1a24b04b60062849011ed81f

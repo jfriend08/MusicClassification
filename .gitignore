@@ -11,4 +11,5 @@ data_small_correctFormat.in
 *_songs.in
 
 !finalproject/results/*
+!finalproject/results_svc/*
 
