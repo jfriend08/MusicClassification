@@ -1,0 +1,117 @@
+\documentclass[final]{siamltexmm}
+
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\newcommand{\pe}{\psi}
+\def\d{\delta} 
+\def\ds{\displaystyle} 
+\def\e{{\epsilon}} 
+\def\eb{\bar{\eta}}  
+\def\enorm#1{\|#1\|_2} 
+\def\Fp{F^\prime}  
+\def\fishpack{{FISHPACK}} 
+\def\fortran{{FORTRAN}} 
+\def\gmres{{GMRES}} 
+\def\gmresm{{\rm GMRES($m$)}} 
+\def\Kc{{\cal K}} 
+\def\norm#1{\|#1\|} 
+\def\wb{{\bar w}} 
+\def\zb{{\bar z}} 
+
+% some definitions of bold math italics to make typing easier.
+% They are used in the corollary.
+
+\def\bfE{\mbox{\boldmath$E$}}
+\def\bfG{\mbox{\boldmath$G$}}
+
+\title{Computational Machine Learning Homework4}
+\author{Yun-shao Sung\thanks{\tt yss265@nyu.edu}
+        \and Hung-Ting Wen\thanks{\tt htw230@nyu.edu}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This document served as the purpose of answering qestions from homework assignment, and also conclude the experiment observations.
+\end{abstract}
+
+\pagestyle{myheadings}
+\thispagestyle{plain}
+
+
+\section{Introduction}
+
+
+\section{Background}
+
+\section{Baseline Approaches}
+To have our baseline approaches reaching similar accuracy as the previous finding, we have implemented some methods trying to reach the goal, and also trying to test our hypothesis. First of all is the interpretation of MFCC product. The MFCC product will be the shape of (n\_mfcc, time), which n\_mfcc is the number of mel-frequency and we set as 20, and time this time frame of the input clip signal. Then, as the instinct from previous experiment, we transpose MFCC product to the shape of (time, n\_mfcc) which is transforming the meaning of feature representation of each mel-frequency over time to feature representation of each time moment in the clip over time mel-frequency. Althought this transpose will yield better accracucy, the further interprestation is yet unsure. We are not sure whether we should treat transposed-MFCC product as multi points in n\_mfcc-dim space, or treat transposed-MFCC product as one point in $time \times n\_mfcc$-dim space.
+\\The second question is about the VLAD. The idea of the VLAD descriptor is to accumulate, for each visual word $c_{i}$, the differences x-$c_{i}$ of the vectors x assigned to $c_{i}$:
+\begin{equation}
+c_{i, j} = \sum\limits_{x such that NN(x)=c_{i}} x_{i}-c_{i,j}
+\end{equation}
+where $x_{i}$ and $c_{i,j}$ respectively denote the jth component of the descriptor x considered and of its corresponding visual word $c_{i}$. We was wondering what if we sum up all the result into just d-dimension instead of the original VLAD representation $D=k\times d$, where k and d are the number of centroids and dimension of each centroid. Therefore, we named these two VLAD methods as Sum VLAD and Concatenate VLAD, and due to high dimension of Concatenate VLAD, we then perforemed PCA with whitening for dimension reduction.
+\\\\As the results of the questions mentioned previously, we performed the folloing appraoches to reach the questions:
+\\ 1. multi points MFCC + Kmeans + Sum VLAD + k nearest neighbor
+\\ 2. multi points MFCC + Kmeans + Sum VLAD + SVC
+\\ 3. one point MFCC + Kmeans + Sum VLAD + SVC
+\\ 4. multi points MFCC + Kmeans + Concatenate VLAD + PCA + k nearest neighbor
+\\ 5. multi points MFCC + Kmeans + Concatenate VLAD + PCA + SVC
+\\ 6. one points MFCC + Kmeans + Concatenate VLAD + PCA + SVC
+
+\\As comparing method 1 and 2, we noticed generally SVC has better accuracy than KNN, but also at the cost of efficiency. This may due to the properity that SVC is using 1-vs-1 scheme for $n\_classes\times(n\_classes-1)/2$ times, which maybe more delicate than KNN. We have also tested the LinearSVC method, which is 1-vs-rest scheme. Generally speaking, the accuracy of LinearSVC is still better than KNN and slightly lower than SVC.
+\\By having the result from method 3 and compare to method 2, we noticed we cannot get any furthre improvement from method 3, and even the accuracy is decreased. This phenomenon is getting even worse when comparing the results from method 5 and 6. Therefore, we can clearly see treating the MFCC product as one point is definitely not a good method, and the possible explaination for this is probably due to we are fixing the sequencing meaning of feature representation into fixed order. For example a clip from Jazz genre may have the component of drum, guitar, and bass, and MFCC product gives us the features quantification at each time points. As we concatenate them with the fixed order, we are like telling the classifier the feature with this is order is belong to certain genre. However, the order of drump-guitar-bass or guitar-bass-drump should be equally considered as Jazz.
+\\As comparing the method4 versus method1 and method5 versus method2, we can see the accuracy increased, especially in method5. Our centroids are obtained from the Kmeans of our implementation with Kmean++ for initialization and n_noImprovement=20 as stopping criteria, and a
+\\
+\begin{center}
+  \begin{tabular}{ l || c | r }
+    \hline
+    Method Ids & Accuracy (\%) \\ \hline \hline
+    Method 1 & 48 \\ \hline
+    Method 2 & 58 \\ \hline
+    Method 3 & 56 \\ \hline
+    Method 4 & 50 \\ \hline
+    Method 5 & 70 \\ \hline
+    Method 6 & 33 \\ \hline
+    \hline
+  \end{tabular}
+  \begin{tablenotes}
+    \small
+    \item Methods of each baseline approaches and its corresponding accuracy.
+  \end{tablenotes}
+\end{center}
+
+\section{New Feature Extraction Approaches}
+As our result from baseline approaches (best 70\%) yields is comparable to previouse finding using MFCC (best 71\%), we also, based on the fundation of best baseline approach, experimentally invent new methods trying to further improve the best accuracy as well as the robustness of parameter searching, and here we mainly focus on the improvement of feature extraction. In additional to regular mfcc, librosa provides harmonic and percussive seperation (librosa.effects.hpss), which the underline mechanism is the STFT-HPSS-ISTFT pipeline, and it ensures that the output waveforms have equal length to the input signal. Secondly, we are trying to use librosa delta method (librosa.feature.delta) to capture the first and second derivative information from harmonic and percussive signal. As we mentioned from previous baseline method, concatenating MFCC product and treating it as one point is fixing the signal sequecial meaning which will limit the freedom the classification. However, the signal transition at every monent might hiding clear feature representation, and, therefore, taking the signal derivative and treat it as feature representation points might be a useful method. The final approach is the scattering of HPSS, and this idea is probably inspired by the switch of Sum VLAD to Concatenate VLAD mentioned previously. We noticed even signal being splited to harmonic and percussive parts, there are still plenty of residue signal in each splits. For example, although being removed significantly, there are still noticable percussive components in the harmonic split, and vise versa. Therefore, here we performed second order HPSS scattering as the new feature extraction method.
+\\\\Below are our new approaches:
+\\ 1. HPSS + MFCC + method 5 in baseline approach
+\\ 2. HPSS w/ 1st delta w/ 2nd delta + MFCC + method 5 in baseline approach
+\\ 3. 2nd HPSS scattering + MFCC + method 5 in baseline approach
+\\yoyo
+\begin{center}
+  \begin{tabular}{ l || c | r }
+    \hline
+    Method Ids & Accuracy (\%) \\ \hline \hline
+    Method 1 & 77 \\ \hline
+    Method 2 & 76 \\ \hline
+    Method 3 & 79 \\ \hline
+    \hline
+  \end{tabular}
+  \begin{tablenotes}
+    \small
+    \item Methods of each new feature extraction approaches and its corresponding accuracy.
+  \end{tablenotes}
+\end{center}
+
+\begin{thebibliography}{10}
+\bibitem{fpf} {\sc Low pass filter by FFT convolution}, {\em http://www.dsprelated.com/freebooks/sasp/Example\_1\_Low\_Pass\_Filtering.html}
+\bibitem{msc} {\sc Multiscale Scattering for Audio Classifications}, {\em http://www.cmap.polytechnique.fr/scattering/ismir-final.pdf}
+\bibitem{dl} {\sc Digital image processing: p067- Dictionary Learning}, {\em https://www.youtube.com/watch?v=XLXSVLKZE7U}
+\bibitem{ipm} {\sc Interior-point methods}, {\em https://web.stanford.edu/class/ee364a/lectures/barrier.pdf}
+\bibitem{ista} {\sc Iterative Shrinkage/Thresholding Algorithms}, {\em http://people.ee.duke.edu/~lcarin/figueiredo.pdf}
+\bibitem{mpwtfd} {\sc Matching pursuits with time-frequency dictionaries}, {\em http://www.cmap.polytechnique.fr/~mallat/papiers/MallatPursuit93.pdf}
+\bibitem{eik} {\sc Efficient Implementation of the K-SVD Algorithm using Batch Orthogonal Matching Pursuit}, {\em http://www.cs.technion.ac.il/~ronrubin/Publications/KSVD-OMP-v2.pdf}
+\end{thebibliography}
+
+\end{document}
