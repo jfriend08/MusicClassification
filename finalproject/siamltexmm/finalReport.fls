@@ -99,6 +99,8 @@ INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmcsc10.tfm
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
 INPUT /usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map
+INPUT ../fig/harmonic_percussiv_mfcc_nolog.png
+INPUT ../fig/harmonic_percussiv_mfcc_nolog.png
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmti9.tfm
 INPUT finalReport.aux
 INPUT ./finalReport.out

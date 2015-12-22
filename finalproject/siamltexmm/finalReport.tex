@@ -89,7 +89,17 @@ As our result from baseline approaches (best 70\%) yields is comparable to previ
 \\ 1. HPSS + MFCC + method 5 in baseline approach
 \\ 2. HPSS w/ 1st delta w/ 2nd delta + MFCC + method 5 in baseline approach
 \\ 3. 2nd HPSS scattering + MFCC + method 5 in baseline approach
-\\yoyo
+\\
+\\From the original method mentioned in baseline approaches, now our method 1 can further reached to 77\% of accuracy. Also we noticed the harmonic and percussiv seperation is essential as we make the spectrogram plot of each parts. From the spectrogram plot of original clip, certain time period in original clip looks just like normal but these peroids actually existing significant differences between harmonic and percussiv parts. Just like the onion metaphor mentioned previously, we believe peeling the original clip can contcate each of parts followed by MFCC will give us more feature representation to understand this song.
+\\
+
+\begin{figure}[!ht]
+  \centering
+    \reflectbox{%
+      \includegraphics[width=0.5\textwidth]{../fig/harmonic_percussiv_mfcc_nolog.png}}
+  \caption{MFCC spectrogram of original clip, harmonic, and percussiv parts}
+\end{figure}
+
 \begin{center}
   \begin{tabular}{ l || c | r }
     \hline
