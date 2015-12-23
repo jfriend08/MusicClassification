@@ -45,14 +45,16 @@ This document served as the purpose of answering qestions from homework assignme
 \thispagestyle{plain}
 
 
-\section{Introduction}
+\section{Introduction \& Background}
+Our purpose of this project is to build a learning machine that can distinguish between different music genres.  Music genre classification has never been an easy task, even for human.  Different chords, beats, and tonality can change the way people perceive about a song, even with slightest differences.  Therefore, the biggest challenge for us is how to extract and distinguish those meaningful differences from signals.
 
-\section{Background}
-Our project focused on feature extraction using different approaches on signals.  We started with re-creating results of 2nd-order scattering \cite{mgc} , for which we have accuracy of 79\%, which is close to the results of our reference paper. %Need to add 2nd-order scattering details
+Hence, our project focused on feature extraction using different approaches on signals.  We started with re-creating results of 2nd-order scattering \cite{mgc} , for which we have accuracy of 79\%, which is close to the results of our reference paper.
+
+The data set we are using is GTZAN Music Genre Collection \cite{data} , which parallels with our reference paper and many other similar works.  This data set contains 10 genres, where each genre has 100 tracks in it.
 
 However, we faced memory usage problem when running 2nd-order scattering.  Given a clip of signals with size of 50000, after 2nd-order scattering it will become size of $670 \times 50000$, and it's only on clip.  We have 10 clips per song, and there has 1000 songs in total.
 
-Inspired by 2nd-order scattering, we moved on to design several different appraoches, focused on extracting different but yet meaningful signals from raw data, as if it's a layered material and we are trying to break down its components.  With these approaches, memory usage is not growing that fast and thus our experimental obstacle was solved.  Hence, we moved on to focus on improving correctness.
+Inspired by 2nd-order scattering, we moved on to design several different appraoches, focused on extracting different but yet meaningful signals from raw data, as if it's a layered material and we are trying to break down its components.  With these approaches, memory usage is not growing that fast and thus our experimental obstacle was solved.  Hence, we moved on to focus on improving correctness.  That is, verify whether our feature extraction approaches make sense or not through experimental results on predictin accuracy.
 
 \begin{figure}[ht]
   \begin{center}
@@ -60,7 +62,7 @@ Inspired by 2nd-order scattering, we moved on to design several different apprao
   \end{center}
 \end{figure}
 
-From Table I. we can see various experiment results with different classifiers and different ways of featuer extraction.  Although our experiment results didn't reach the result on top of list, we emphasize on robustness.  That is, in general our prediction accuracies are concentrated around 70\% to 75\% and we hit 79\% often.
+From Table I. we can see various experiment results with different classifiers and different ways of featuer extraction.  Our experiment results didn't reach the result on top of list.  Part of reason is because we didn't try to use some fancy classifiers.  Instead, since we focused on feature extraction, we use only KNN and SVC as our classifiers in order to see a comparable results.  As a result, our prediction accuracies are concentrated around 70\% to 75\% and we hit 79\% often.  Robustness became one of our major results.
 
 \section{Baseline Approaches}
 To have our baseline approaches reaching similar accuracy as the previous finding, we have implemented some methods trying to reach the goal, and also trying to test our hypothesis. First of all is the interpretation of MFCC product. The MFCC product will be the shape of (n\_mfcc, time), which n\_mfcc is the number of mel-frequency and we set as 20, and time this time frame of the input clip signal. Then, as the instinct from previous experiment, we transpose MFCC product to the shape of (time, n\_mfcc) which is transforming the meaning of feature representation of each mel-frequency over time to feature representation of each time moment in the clip over time mel-frequency. Althought this transpose will yield better accracucy, the further interprestation is yet unsure. We are not sure whether we should treat transposed-MFCC product as multi points in n\_mfcc-dim space, or treat transposed-MFCC product as one point in $time \times n\_mfcc$-dim space.
@@ -182,6 +184,7 @@ From the original method mentioned in baseline approaches, now our method 1 can 
 \bibitem{mpwtfd} {\sc Matching pursuits with time-frequency dictionaries}, {\em http://www.cmap.polytechnique.fr/~mallat/papiers/MallatPursuit93.pdf}
 \bibitem{eik} {\sc Efficient Implementation of the K-SVD Algorithm using Batch Orthogonal Matching Pursuit}, {\em http://www.cs.technion.ac.il/~ronrubin/Publications/KSVD-OMP-v2.pdf}
 \bibitem{mgc} {\sc Music Genre Classification Using Multiscale Scattering and Sparse Representations}, {\em http://www.princeton.edu/~xuchen/resources/pdf/music13.pdf}
+\bibitem{data} {\sc GTZAN Music Genre Collection}, {\em http://marsyasweb.appspot.com/download/data\_sets/}
 \end{thebibliography}
 
 \end{document}
