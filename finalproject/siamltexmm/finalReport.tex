@@ -1,8 +1,13 @@
 \documentclass[final]{siamltexmm}
+\documentclass[10pt,a4paper]{article}
 
 \usepackage{graphicx}
 \usepackage{algorithm}
 \usepackage{algorithmic}
+
+\usepackage[demo]{graphicx}
+\usepackage{subfig}
+
 \newcommand{\pe}{\psi}
 \def\d{\delta} 
 \def\ds{\displaystyle} 
@@ -60,22 +65,16 @@ where $x_{i}$ and $c_{i,j}$ respectively denote the jth component of the descrip
 \\ 5. multi points MFCC + Kmeans + Concatenate VLAD + PCA + SVC
 \\ 6. one points MFCC + Kmeans + Concatenate VLAD + PCA + SVC
 
-\begin{figure}
-\centering
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=.4\linewidth]{../fig/svcSplit1_svcNewVLAD200Iter.png}
-  \caption{Baseline method 5: Accuracy from search space}
-  \label{fig:sub1}
-\end{subfigure}%
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=.4\linewidth]{../fig/svcFlatSplit1_ScatterHPMFCCNewVLAD.png}
-  \caption{New feature extraction method 3: Accuracy from search space}
-  \label{fig:sub2}
-\end{subfigure}
-\caption{Best accuracy from baseline and new extraction method}
-\label{fig:test}
+
+
+
+\begin{figure}%
+    \centering
+    \subfloat[Baseline method 5]{{\includegraphics[width=5cm]{../fig/svcSplit1_svcNewVLAD200Iter.png} }}%
+    \qquad
+    \subfloat[Feature extraction method 3]{{\includegraphics[width=5cm]{../fig/svcFlatSplit1_ScatterHPMFCCNewVLAD.png} }}%
+    \caption{Best accuracy from baseline and new extraction method}%
+    \label{fig:example}%
 \end{figure}
 
 \\As comparing method 1 and 2, we noticed generally SVC has better accuracy than KNN, but also at the cost of efficiency. This may due to the properity that SVC is using 1-vs-1 scheme for $n\_classes\times(n\_classes-1)/2$ times, which maybe more delicate than KNN. We have also tested the LinearSVC method, which is 1-vs-rest scheme. Generally speaking, the accuracy of LinearSVC is still better than KNN and slightly lower than SVC.
@@ -114,30 +113,24 @@ As our result from baseline approaches (best 70\%) yields is comparable to previ
 \begin{figure}[!ht]
   \centering
     \reflectbox{%
-      \includegraphics[width=0.5\textwidth]{../fig/harmonic_percussiv_mfcc_nolog.png}}
+      \includegraphics[width=0.7\textwidth]{../fig/harmonic_percussiv_mfcc_nolog.png}}
   \caption{MFCC spectrogram of original clip, harmonic, and percussiv parts}
 \end{figure}
 
 \begin{figure}[!ht]
   \centering
     \reflectbox{%
-      \includegraphics[width=0.5\textwidth]{../fig/HP_deltas1.png}}
+      \includegraphics[width=0.7\textwidth]{../fig/HP_deltas1.png}}
   \caption{MFCC spectrogram of feature.delta from original clip, harmonic, and percussiv parts}
 \end{figure}
 
 \begin{figure}[!ht]
   \centering
     \reflectbox{%
-      \includegraphics[width=0.5\textwidth]{../fig/HP_deltas1.png}}
-  \caption{MFCC spectrogram of feature.delta from original clip, harmonic, and percussiv parts}
-\end{figure}
-
-\begin{figure}[!ht]
-  \centering
-    \reflectbox{%
-      \includegraphics[width=0.5\textwidth]{../fig/histogram_n1.png}}
+      \includegraphics[width=0.7\textwidth]{../fig/histogram_n1.png}}
   \caption{Histogram of accuracy result from search space. Top row is baseline method 5, and the remaining rows are new feature extraction method 1, 2, and 3 respectively}
 \end{figure}
+
 
 \begin{center}
   \begin{tabular}{ l || c | r }
