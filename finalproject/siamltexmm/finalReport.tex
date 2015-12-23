@@ -1,13 +1,8 @@
 \documentclass[final]{siamltexmm}
-\documentclass[10pt,a4paper]{article}
 
 \usepackage{graphicx}
 \usepackage{algorithm}
 \usepackage{algorithmic}
-
-\usepackage[demo]{graphicx}
-\usepackage{subfig}
-
 \newcommand{\pe}{\psi}
 \def\d{\delta} 
 \def\ds{\displaystyle} 
@@ -48,15 +43,19 @@ This document served as the purpose of answering qestions from homework assignme
 \section{Introduction}
 
 \section{Background}
-Our project focused on feature extraction using different approaches on signals.  We started with re-creating results of 2nd-order scattering \cite{mgc} , for which we have accuracy of 79\%, which is close to the results of our reference paper.
+Our project focused on feature extraction using different approaches on signals.  We started with re-creating results of 2nd-order scattering \cite{mgc} , for which we have accuracy of 79\%, which is close to the results of our reference paper. %Need to add 2nd-order scattering details
+
+However, we faced memory usage problem when running 2nd-order scattering.  Given a clip of signals with size of 50000, after 2nd-order scattering it will become size of $670 \times 50000$, and it's only on clip.  We have 10 clips per song, and there has 1000 songs in total.
+
+Instead, inspired by 2nd-order scattering \cite{mgc} , we moved on to design a new method, HPSS scattering , a continous HP seperation for feature extraction.  %Need to add some details
 
 \begin{figure}[ht]
   \begin{center}
-    \includegraphics[scale=0.3]{../fig/refAccr.png}
+    \includegraphics[scale=0.7]{../fig/refAccr.png}
   \end{center}
 \end{figure}
 
-From Table I. we can see various experiment results with different classifiers and different ways of feature extraction.  We continued our experiments using MFCC and making further improvements on top of it.  The reason we chose this appraoch is to reason about data transformations from signals to feature vectors and to see if experimental results parallels to what we expected.
+From Table I. we can see various experiment results with different classifiers and different ways of featuer extraction.  Although our experiment results didn't reach the result on top of list, we have a robustness results.  % Need to add some data
 
 \section{Baseline Approaches}
 To have our baseline approaches reaching similar accuracy as the previous finding, we have implemented some methods trying to reach the goal, and also trying to test our hypothesis. First of all is the interpretation of MFCC product. The MFCC product will be the shape of (n\_mfcc, time), which n\_mfcc is the number of mel-frequency and we set as 20, and time this time frame of the input clip signal. Then, as the instinct from previous experiment, we transpose MFCC product to the shape of (time, n\_mfcc) which is transforming the meaning of feature representation of each mel-frequency over time to feature representation of each time moment in the clip over time mel-frequency. Althought this transpose will yield better accracucy, the further interprestation is yet unsure. We are not sure whether we should treat transposed-MFCC product as multi points in n\_mfcc-dim space, or treat transposed-MFCC product as one point in $time \times n\_mfcc$-dim space.
@@ -72,18 +71,6 @@ where $x_{i}$ and $c_{i,j}$ respectively denote the jth component of the descrip
 \\ 4. multi points MFCC + Kmeans + Concatenate VLAD + PCA + k nearest neighbor
 \\ 5. multi points MFCC + Kmeans + Concatenate VLAD + PCA + SVC
 \\ 6. one points MFCC + Kmeans + Concatenate VLAD + PCA + SVC
-
-
-
-
-\begin{figure}%
-    \centering
-    \subfloat[Baseline method 5]{{\includegraphics[width=5cm]{../fig/svcSplit1_svcNewVLAD200Iter.png} }}%
-    \qquad
-    \subfloat[Feature extraction method 3]{{\includegraphics[width=5cm]{../fig/svcFlatSplit1_ScatterHPMFCCNewVLAD.png} }}%
-    \caption{Best accuracy from baseline and new extraction method}%
-    \label{fig:example}%
-\end{figure}
 
 \\As comparing method 1 and 2, we noticed generally SVC has better accuracy than KNN, but also at the cost of efficiency. This may due to the properity that SVC is using 1-vs-1 scheme for $n\_classes\times(n\_classes-1)/2$ times, which maybe more delicate than KNN. We have also tested the LinearSVC method, which is 1-vs-rest scheme. Generally speaking, the accuracy of LinearSVC is still better than KNN and slightly lower than SVC.
 \\By having the result from method 3 and compare to method 2, we noticed we cannot get any furthre improvement from method 3, and even the accuracy is decreased. This phenomenon is getting even worse when comparing the results from method 5 and 6. Therefore, we can clearly see treating the MFCC product as one point is definitely not a good method, and the possible explaination for this is probably due to we are fixing the sequencing meaning of feature representation into fixed order. For example a clip from Jazz genre may have the component of drum, guitar, and bass, and MFCC product gives us the features quantification at each time points. As we concatenate them with the fixed order, we are like telling the classifier the feature with this is order is belong to certain genre. However, the order of drump-guitar-bass or guitar-bass-drump should be equally considered as Jazz.
@@ -121,24 +108,9 @@ As our result from baseline approaches (best 70\%) yields is comparable to previ
 \begin{figure}[!ht]
   \centering
     \reflectbox{%
-      \includegraphics[width=0.7\textwidth]{../fig/harmonic_percussiv_mfcc_nolog.png}}
+      \includegraphics[width=0.5\textwidth]{../fig/harmonic_percussiv_mfcc_nolog.png}}
   \caption{MFCC spectrogram of original clip, harmonic, and percussiv parts}
 \end{figure}
-
-\begin{figure}[!ht]
-  \centering
-    \reflectbox{%
-      \includegraphics[width=0.7\textwidth]{../fig/HP_deltas1.png}}
-  \caption{MFCC spectrogram of feature.delta from original clip, harmonic, and percussiv parts}
-\end{figure}
-
-\begin{figure}[!ht]
-  \centering
-    \reflectbox{%
-      \includegraphics[width=0.7\textwidth]{../fig/histogram_n1.png}}
-  \caption{Histogram of accuracy result from search space. Top row is baseline method 5, and the remaining rows are new feature extraction method 1, 2, and 3 respectively}
-\end{figure}
-
 
 \begin{center}
   \begin{tabular}{ l || c | r }
