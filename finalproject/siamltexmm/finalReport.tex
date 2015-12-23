@@ -52,7 +52,7 @@ Our project focused on feature extraction using different approaches on signals.
 
 However, we faced memory usage problem when running 2nd-order scattering.  Given a clip of signals with size of 50000, after 2nd-order scattering it will become size of $670 \times 50000$, and it's only on clip.  We have 10 clips per song, and there has 1000 songs in total.
 
-Instead, inspired by 2nd-order scattering \cite{mgc} , we moved on to design a new method, HPSS scattering , a continous HP seperation for feature extraction.  %Need to add some details
+Inspired by 2nd-order scattering, we moved on to design several different appraoches, focused on extracting different but yet meaningful signals from raw data, as if it's a layered material and we are trying to break down its components.  With these approaches, memory usage is not growing that fast and thus our experimental obstacle was solved.  Hence, we moved on to focus on improving correctness.
 
 \begin{figure}[ht]
   \begin{center}
@@ -60,7 +60,7 @@ Instead, inspired by 2nd-order scattering \cite{mgc} , we moved on to design a n
   \end{center}
 \end{figure}
 
-From Table I. we can see various experiment results with different classifiers and different ways of featuer extraction.  Although our experiment results didn't reach the result on top of list, we have a robustness results.
+From Table I. we can see various experiment results with different classifiers and different ways of featuer extraction.  Although our experiment results didn't reach the result on top of list, we emphasize on robustness.  That is, in general our prediction accuracies are concentrated around 70\% to 75\% and we hit 79\% often.
 
 \section{Baseline Approaches}
 To have our baseline approaches reaching similar accuracy as the previous finding, we have implemented some methods trying to reach the goal, and also trying to test our hypothesis. First of all is the interpretation of MFCC product. The MFCC product will be the shape of (n\_mfcc, time), which n\_mfcc is the number of mel-frequency and we set as 20, and time this time frame of the input clip signal. Then, as the instinct from previous experiment, we transpose MFCC product to the shape of (time, n\_mfcc) which is transforming the meaning of feature representation of each mel-frequency over time to feature representation of each time moment in the clip over time mel-frequency. Althought this transpose will yield better accracucy, the further interprestation is yet unsure. We are not sure whether we should treat transposed-MFCC product as multi points in n\_mfcc-dim space, or treat transposed-MFCC product as one point in $time \times n\_mfcc$-dim space.
