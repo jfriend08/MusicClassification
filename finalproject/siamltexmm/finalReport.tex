@@ -60,7 +60,7 @@ Instead, inspired by 2nd-order scattering \cite{mgc} , we moved on to design a n
   \end{center}
 \end{figure}
 
-From Table I. we can see various experiment results with different classifiers and different ways of featuer extraction.  Although our experiment results didn't reach the result on top of list, we have a robustness results.  % Need to add some data
+From Table I. we can see various experiment results with different classifiers and different ways of featuer extraction.  Although our experiment results didn't reach the result on top of list, we have a robustness results.
 
 \section{Baseline Approaches}
 To have our baseline approaches reaching similar accuracy as the previous finding, we have implemented some methods trying to reach the goal, and also trying to test our hypothesis. First of all is the interpretation of MFCC product. The MFCC product will be the shape of (n\_mfcc, time), which n\_mfcc is the number of mel-frequency and we set as 20, and time this time frame of the input clip signal. Then, as the instinct from previous experiment, we transpose MFCC product to the shape of (time, n\_mfcc) which is transforming the meaning of feature representation of each mel-frequency over time to feature representation of each time moment in the clip over time mel-frequency. Althought this transpose will yield better accracucy, the further interprestation is yet unsure. We are not sure whether we should treat transposed-MFCC product as multi points in n\_mfcc-dim space, or treat transposed-MFCC product as one point in $time \times n\_mfcc$-dim space.
