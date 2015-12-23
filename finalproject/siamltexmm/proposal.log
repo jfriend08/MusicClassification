@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  22 DEC 2015 21:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  16 DEC 2015 12:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**finalReport.tex
-(./finalReport.tex
+**proposal.tex
+(./proposal.tex
 LaTeX2e <2015/01/01>
 Babel <3.9l> and hyphenation patterns for 79 languages loaded.
 (./siamltexmm.cls
@@ -206,8 +206,8 @@ Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
 \ALC@tlm=\skip44
 \algorithmicindent=\skip45
 )
-(./finalReport.aux)
-\openout1 = `finalReport.aux'.
+(./proposal.aux)
+\openout1 = `proposal.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
 LaTeX Font Info:    ... okay on input line 32.
@@ -238,9 +238,9 @@ LaTeX Info: Redefining \ref on input line 32.
 LaTeX Info: Redefining \pageref on input line 32.
 LaTeX Info: Redefining \nameref on input line 32.
 
-(./finalReport.out) (./finalReport.out)
+(./proposal.out) (./proposal.out)
 \@outlinefile=\write3
-\openout3 = `finalReport.out'.
+\openout3 = `proposal.out'.
 
 
 (/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
@@ -284,26 +284,104 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 34.
 
-<../fig/refAccr.png, id=5, 362.35374pt x 198.7425pt>
-File: ../fig/refAccr.png Graphic file (type png)
- <use ../fig/refAccr.png>
-Package pdftex.def Info: ../fig/refAccr.png used on input line 50.
-(pdftex.def)             Requested size: 108.70695pt x 59.6232pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 61--70
-
- []
+<Figure1.png, id=4, 773.89125pt x 424.58624pt>
+File: Figure1.png Graphic file (type png)
+ <use Figure1.png>
+Package pdftex.def Info: Figure1.png used on input line 50.
+(pdftex.def)             Requested size: 232.16916pt x 127.37685pt.
 
 ! Undefined control sequence.
 \@thehead ->\slugmaster 
                         
-l.70 
-     
+l.66 \end{equation}
+                   
 ? 
 [1
 
-{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <../fig/
-refAccr.png>]
+{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./Figur
+e1.png>]
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ™ in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ™ in font cmr10!
+ <Figure2.png, id=30, 367.3725pt x 93.34875pt>
+File: Figure2.png Graphic file (type png)
+ <use Figure2.png>
+Package pdftex.def Info: Figure2.png used on input line 111.
+(pdftex.def)             Requested size: 293.89838pt x 74.6791pt.
+
+<Figure3.png, id=33, 312.16624pt x 197.73875pt>
+File: Figure3.png Graphic file (type png)
+ <use Figure3.png>
+Package pdftex.def Info: Figure3.png used on input line 118.
+(pdftex.def)             Requested size: 156.08273pt x 98.86913pt.
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
+put line 126.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.139             \ENDFOR
+                         
+? 
+
+Overfull \vbox (3.04993pt too high) has occurred while \output is active []
+
+
+[2]
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ™ in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ™ in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ™ in font cmr10!
+
+Underfull \hbox (badness 10000) in paragraph at lines 155--158
+
+ []
+
+
+Overfull \vbox (3.04993pt too high) has occurred while \output is active []
+
+
+[3pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
+has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.158 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.
+2}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.158 
+       <./Figure2.png> <./Figure3.png>]
+<Figure4.png, id=61, 371.3875pt x 192.72pt>
+File: Figure4.png Graphic file (type png)
+ <use Figure4.png>
+Package pdftex.def Info: Figure4.png used on input line 163.
+(pdftex.def)             Requested size: 297.1104pt x 154.1762pt.
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) ha
+s been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.164   \caption
+                {K-SVD Algorithm}pdfTeX warning (ext4): destination with the sa
+me identifier (name{figure.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.164   \caption{K-SVD Algorithm}
+                                 
 
 ! LaTeX Error: There's no line here to end.
 
@@ -311,155 +389,118 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.71 \\A
-        s comparing method 1 and 2, we noticed generally SVC has better accu...
+l.169 T
+       he algorithm being used in reference paper are the combinations of sc...
 
 ? 
 
-Underfull \hbox (badness 10000) in paragraph at lines 71--76
-
- []
+Underfull \vbox (badness 5893) has occurred while \output is active []
 
 
 Overfull \vbox (3.04993pt too high) has occurred while \output is active []
 
 
-[2]
+[4 <./Figure4.png>] <Figure5.png, id=82, 357.335pt x 150.5625pt>
+File: Figure5.png Graphic file (type png)
 
-! LaTeX Error: Environment tablenotes undefined.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
+<use Figure5.png>
+Package pdftex.def Info: Figure5.png used on input line 175.
+(pdftex.def)             Requested size: 285.86838pt x 120.45015pt.
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) ha
+s been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.176   \caption
+                {Genre recognition accuracy of various algorithm on  GTZAN d...
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) ha
+s been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.176 ...y of various algorithm on  GTZAN dataset}
                                                   
-l.88   \begin{tablenotes}
-                         
-? 
-
-! LaTeX Error: \begin{center} on input line 76 ended by \end{tablenotes}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
+<Figure6.png, id=83, 328.22626pt x 125.46875pt>
+File: Figure6.png Graphic file (type png)
+ <use Figure6.png>
+Package pdftex.def Info: Figure6.png used on input line 183.
+(pdftex.def)             Requested size: 262.58136pt x 100.37512pt.
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) ha
+s been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.184   \caption
+                {Genre recognition accuracy of proposed method on  GTZAN dat...
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) ha
+s been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.184 ...sed method on  GTZAN dataset (using SRC)}
                                                   
-l.91   \end{tablenotes}
-                       
-? 
-
-Underfull \hbox (badness 10000) in paragraph at lines 95--103
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 95--103
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 95--103
-
- []
-
-<../fig/harmonic_percussiv_mfcc_nolog.png, id=36, 867.24pt x 433.62pt>
-File: ../fig/harmonic_percussiv_mfcc_nolog.png Graphic file (type png)
-
-<use ../fig/harmonic_percussiv_mfcc_nolog.png>
-Package pdftex.def Info: ../fig/harmonic_percussiv_mfcc_nolog.png used on input
- line 107.
-(pdftex.def)             Requested size: 222.26642pt x 111.13072pt.
-
 Overfull \vbox (3.04993pt too high) has occurred while \output is active []
 
 
-[3]
-
-! LaTeX Error: Environment tablenotes undefined.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.120   \begin{tablenotes}
-                          
-? 
-
-! LaTeX Error: \begin{center} on input line 111 ended by \end{tablenotes}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.123   \end{tablenotes}
-                        
-? 
-
-Overfull \hbox (63.13724pt too wide) in paragraph at lines 127--128
+[5 <./Figure5.png> <./Figure6.png>]
+Overfull \hbox (63.13724pt too wide) in paragraph at lines 193--194
 []\OT1/cmr/m/sc/9 Low pass fil-ter by FFT con-vo-lu-tion\OT1/cmr/m/n/9 , \OT1/c
 mr/m/it/9 http://www.dsprelated.com/freebooks/sasp/Example[]1[]Low[]Pass[]Filte
 ring.html 
  []
 
 
-Overfull \hbox (14.24297pt too wide) in paragraph at lines 128--129
+Overfull \hbox (14.24297pt too wide) in paragraph at lines 194--195
 []\OT1/cmr/m/sc/9 Multiscale Scat-ter-ing for Au-dio Clas-si-fi-ca-tions\OT1/cm
 r/m/n/9 , \OT1/cmr/m/it/9 http://www.cmap.polytechnique.fr/scattering/ismir-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 129--130
+Underfull \hbox (badness 10000) in paragraph at lines 195--196
 []\OT1/cmr/m/sc/9 Digital im-age pro-cess-ing: p067- Dic-tio-nary Learn-ing\OT1
 /cmr/m/n/9 ,
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 137.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 202.
 
 Overfull \vbox (3.04993pt too high) has occurred while \output is active []
 
 
-[4pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
-has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.137 \end{document}
-                     <../fig/harmonic_percussiv_mfcc_nolog.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 137.
-
-(./finalReport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 137.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 137.
-Package rerunfilecheck Info: File `finalReport.out' has not changed.
+[6]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 202.
+ (./proposal.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 202.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 202.
+Package rerunfilecheck Info: File `proposal.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 137.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 202.
  ) 
 Here is how much of TeX's memory you used:
- 5714 strings out of 493089
- 83853 string characters out of 6134842
- 170529 words of memory out of 5000000
- 9139 multiletter control sequences out of 15000+600000
- 10202 words of font info for 36 fonts, out of 8000000 for 9000
+ 5802 strings out of 493089
+ 84569 string characters out of 6134842
+ 174996 words of memory out of 5000000
+ 9196 multiletter control sequences out of 15000+600000
+ 10510 words of font info for 37 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,8n,23p,1735b,347s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pf
-b></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
-></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></
-usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></us
-r/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
-local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/loc
-al/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/
-texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/t
-exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/local/tex
-live/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/te
-xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
-live/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texli
-ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive
-/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2
-015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on finalReport.pdf (4 pages, 287715 bytes).
+ 36i,13n,23p,1168b,629s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb
+></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb>
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
+/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></u
+sr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr
+/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/l
+ocal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/loca
+l/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/t
+exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texl
+ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texli
+ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/local/texlive
+/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texliv
+e/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
+/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2
+015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/201
+5/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2015/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
+Output written on proposal.pdf (6 pages, 999678 bytes).
 PDF statistics:
- 113 PDF objects out of 1000 (max. 8388607)
- 86 compressed objects within 1 object stream
- 19 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 173 PDF objects out of 1000 (max. 8388607)
+ 133 compressed objects within 2 object streams
+ 46 named destinations out of 1000 (max. 500000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

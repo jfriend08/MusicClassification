@@ -42,8 +42,16 @@ This document served as the purpose of answering qestions from homework assignme
 
 \section{Introduction}
 
-
 \section{Background}
+Our project focused on feature extraction using different approaches on signals.  We started with re-creating results of 2nd-order scattering \cite{mgc} , for which we have accuracy of 79\%, which is close to the results of our reference paper.
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[scale=0.3]{../fig/refAccr.png}
+  \end{center}
+\end{figure}
+
+From Table I. we can see various experiment results with different classifiers and different ways of feature extraction.  We continued our experiments using MFCC and making further improvements on top of it.  The reason we chose this appraoch is to reason about data transformations from signals to feature vectors and to see if experimental results parallels to what we expected.
 
 \section{Baseline Approaches}
 To have our baseline approaches reaching similar accuracy as the previous finding, we have implemented some methods trying to reach the goal, and also trying to test our hypothesis. First of all is the interpretation of MFCC product. The MFCC product will be the shape of (n\_mfcc, time), which n\_mfcc is the number of mel-frequency and we set as 20, and time this time frame of the input clip signal. Then, as the instinct from previous experiment, we transpose MFCC product to the shape of (time, n\_mfcc) which is transforming the meaning of feature representation of each mel-frequency over time to feature representation of each time moment in the clip over time mel-frequency. Althought this transpose will yield better accracucy, the further interprestation is yet unsure. We are not sure whether we should treat transposed-MFCC product as multi points in n\_mfcc-dim space, or treat transposed-MFCC product as one point in $time \times n\_mfcc$-dim space.
@@ -123,6 +131,7 @@ As our result from baseline approaches (best 70\%) yields is comparable to previ
 \bibitem{ista} {\sc Iterative Shrinkage/Thresholding Algorithms}, {\em http://people.ee.duke.edu/~lcarin/figueiredo.pdf}
 \bibitem{mpwtfd} {\sc Matching pursuits with time-frequency dictionaries}, {\em http://www.cmap.polytechnique.fr/~mallat/papiers/MallatPursuit93.pdf}
 \bibitem{eik} {\sc Efficient Implementation of the K-SVD Algorithm using Batch Orthogonal Matching Pursuit}, {\em http://www.cs.technion.ac.il/~ronrubin/Publications/KSVD-OMP-v2.pdf}
+\bibitem{mgc} {\sc Music Genre Classification Using Multiscale Scattering and Sparse Representations}, {\em http://www.princeton.edu/~xuchen/resources/pdf/music13.pdf}
 \end{thebibliography}
 
 \end{document}
