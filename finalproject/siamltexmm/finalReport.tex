@@ -107,7 +107,25 @@ where $x_{i}$ and $c_{i,j}$ respectively denote the jth component of the descrip
 
 \section{New Feature Extraction Approaches}
 As our result from baseline approaches (best 70\%) yields is comparable to previouse finding using MFCC (best 71\%), we also, based on the fundation of best baseline approach, experimentally invent new methods trying to further improve the best accuracy as well as the robustness of parameter searching, and here we mainly focus on the improvement of feature extraction. In additional to regular mfcc, librosa provides harmonic and percussive seperation (librosa.effects.hpss), which the underline mechanism is the STFT-HPSS-ISTFT pipeline, and it ensures that the output waveforms have equal length to the input signal. Secondly, we are trying to use librosa delta method (librosa.feature.delta) to capture the first and second derivative information from harmonic and percussive signal. As we mentioned from previous baseline method, concatenating MFCC product and treating it as one point is fixing the signal sequecial meaning which will limit the freedom the classification. However, the signal transition at every monent might hiding clear feature representation, and, therefore, taking the signal derivative and treat it as feature representation points might be a useful method. The final approach is the scattering of HPSS, and this idea is probably inspired by the switch of Sum VLAD to Concatenate VLAD mentioned previously. We noticed even signal being splited to harmonic and percussive parts, there are still plenty of residue signal in each splits. For example, although being removed significantly, there are still noticable percussive components in the harmonic split, and vise versa. Therefore, here we performed second order HPSS scattering as the new feature extraction method.
-\\\\Below are our new approaches:
+
+\begin{algorithm}[htb]
+  \caption{HPSS Scattering}
+  \label{algo:SC}
+\begin{algorithmic}[1]
+  \FOR{$eachClip \in Song$}
+    \STATE y\_h1, y\_p1 = librosa.effects.hpss(y)
+    \STATE y\_h2, y\_p2 = librosa.effects.hpss(y\_h1)
+    \STATE y\_h3, y\_p3 = librosa.effects.hpss(y\_p1)
+    \STATE y\_h4, y\_p4 = librosa.effects.hpss(y\_h2)
+    \STATE y\_h5, y\_p5 = librosa.effects.hpss(y\_p2)
+    \STATE y\_h6, y\_p6 = librosa.effects.hpss(y\_h3)
+    \STATE y\_h7, y\_p7 = librosa.effects.hpss(y\_p3)
+    \STATE map(MFCC, [y\_h1, y\_p1, y\_h2, y\_p2, y\_h3, y\_p3, y\_h4, y\_p4, y\_h5, y\_p5, y\_h6, y\_p6, y\_h7, y\_p7])
+  \ENDFOR
+\end{algorithmic}
+\end{algorithm}
+
+\\Below are our new approaches:
 \\ 1. HPSS + MFCC + method 5 in baseline approach
 \\ 2. HPSS w/ 1st delta w/ 2nd delta + MFCC + method 5 in baseline approach
 \\ 3. 2nd HPSS scattering + MFCC + method 5 in baseline approach
@@ -120,7 +138,7 @@ As our result from baseline approaches (best 70\%) yields is comparable to previ
   \caption{MFCC spectrogram of original clip, harmonic, and percussiv parts}
 \end{figure}
 
-\\In figure 4.2, not just the differences in harmonic and percussive parts of original song clip, we can also see the apparent difference when we take 1-order and 2-order of feature.delta. Instead of the original clip and its derivative here we keep only the harmonic and percussive parts and its 1-order and 2-order of derivative. Therefore, the feature point of each song clip will ne 6 times more than baseline method 5. Although we are not sure whether it's meaningful to keep the derivative information, in figure 4.3 row3, it turns out the result is still quite improved when comparing to the best baseline method.
+\\In figure 4.2, not just the differences in harmonic and percussive parts of original song clip, we can also see the apparent difference when we take 1-order and 2-order of feature.delta. Instead of the original clip and its derivative here we keep only the harmonic and percussive parts and its 1-order and 2-order derivative. Therefore, the feature point of each song clip will be 6 times more than baseline method 5. Although we are not sure whether it's meaningful to keep the derivative information, in figure 4.3 row 3, it turns out the result is still quite as well as its robustness in figure 4.3 improved when comparing to the best baseline method. As the derivative is taking the transient difference in a tiny time interval and turns out it looks like a meaningful representation, we assume the signal transition at each monent might still be a good representation of song.
 
 \begin{figure}[!ht]
   \centering
