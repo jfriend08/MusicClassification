@@ -65,9 +65,6 @@ where $x_{i}$ and $c_{i,j}$ respectively denote the jth component of the descrip
 \\ 5. multi points MFCC + Kmeans + Concatenate VLAD + PCA + SVC
 \\ 6. one points MFCC + Kmeans + Concatenate VLAD + PCA + SVC
 
-
-
-
 \begin{figure}%
     \centering
     \subfloat[Baseline method 5]{{\includegraphics[width=5cm]{../fig/svcSplit1_svcNewVLAD200Iter.png} }}%
@@ -107,30 +104,31 @@ As our result from baseline approaches (best 70\%) yields is comparable to previ
 \\ 2. HPSS w/ 1st delta w/ 2nd delta + MFCC + method 5 in baseline approach
 \\ 3. 2nd HPSS scattering + MFCC + method 5 in baseline approach
 \\
-\\From the original method mentioned in baseline approaches, now our method 1 can further reached to 77\% of accuracy. Also we noticed the harmonic and percussiv seperation is essential as we make the spectrogram plot of each parts. From the spectrogram plot of original clip, certain time period in original clip looks just like normal but these peroids actually existing significant differences between harmonic and percussiv parts. Just like the onion metaphor mentioned previously, we believe peeling the original clip can contcate each of parts followed by MFCC will give us more feature representation to understand this song.
-\\
+\\From the original method mentioned in baseline approaches, now our method 1 can further reached to 77\% of accuracy. As shown in figure 4.1, we noticed the harmonic and percussiv seperation is essential as we make the spectrogram plot of each parts. From the spectrogram plot of original clip, certain time period in original clip looks just like normal but these peroids actually existing noticable differences between harmonic and percussive parts. Just like the onion metaphor mentioned previously, we believe peeling off the original clip and contcate each of parts followed by MFCC will give us more feature representation to understand this song. As the result of this approach, in the improvement of this approach not only increase the max accuracy to 77\%, but also improve the robustness of the search space. As we can see the row 2 in figure 4.3, the major peak of the search space now significantly shift from original accuracy of 50\% to 65\%. This implies this new feature extraction method can potentially release the computation time and guarantee a better accuracy.
 
 \begin{figure}[!ht]
   \centering
-    \reflectbox{%
-      \includegraphics[width=0.7\textwidth]{../fig/harmonic_percussiv_mfcc_nolog.png}}
+    \includegraphics[width=0.7\textwidth]{../fig/harmonic_percussiv_mfcc_nolog.png}
   \caption{MFCC spectrogram of original clip, harmonic, and percussiv parts}
 \end{figure}
 
+\\In figure 4.2, not just the differences in harmonic and percussive parts of original song clip, we can also see the apparent difference when we take 1-order and 2-order of feature.delta. Instead of the original clip and its derivative here we keep only the harmonic and percussive parts and its 1-order and 2-order of derivative. Therefore, the feature point of each song clip will ne 6 times more than baseline method 5. Although we are not sure whether it's meaningful to keep the derivative information, in figure 4.3 row3, it turns out the result is still quite improved when comparing to the best baseline method.
+
 \begin{figure}[!ht]
   \centering
-    \reflectbox{%
-      \includegraphics[width=0.7\textwidth]{../fig/HP_deltas1.png}}
+    \includegraphics[width=0.7\textwidth]{../fig/HP_deltas1.png}
   \caption{MFCC spectrogram of feature.delta from original clip, harmonic, and percussiv parts}
 \end{figure}
 
+\\TODOs
+
 \begin{figure}[!ht]
   \centering
-    \reflectbox{%
-      \includegraphics[width=0.7\textwidth]{../fig/histogram_n1.png}}
+    \includegraphics[width=0.7\textwidth]{../fig/histogram_n1.png}
   \caption{Histogram of accuracy result from search space. Top row is baseline method 5, and the remaining rows are new feature extraction method 1, 2, and 3 respectively}
 \end{figure}
 
+\\TODOs
 
 \begin{center}
   \begin{tabular}{ l || c | r }

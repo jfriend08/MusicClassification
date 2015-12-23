@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  22 DEC 2015 21:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  22 DEC 2015 21:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -376,7 +376,7 @@ File: ../fig/svcSplit1_svcNewVLAD200Iter.png Graphic file (type png)
 
 <use ../fig/svcSplit1_svcNewVLAD200Iter.png>
 Package pdftex.def Info: ../fig/svcSplit1_svcNewVLAD200Iter.png used on input l
-ine 73.
+ine 70.
 (pdftex.def)             Requested size: 142.26378pt x 109.42587pt.
 
 <../fig/svcFlatSplit1_ScatterHPMFCCNewVLAD.png, id=6, 939.51pt x 722.7pt>
@@ -384,7 +384,7 @@ File: ../fig/svcFlatSplit1_ScatterHPMFCCNewVLAD.png Graphic file (type png)
 
 <use ../fig/svcFlatSplit1_ScatterHPMFCCNewVLAD.png>
 Package pdftex.def Info: ../fig/svcFlatSplit1_ScatterHPMFCCNewVLAD.png used on 
-input line 75.
+input line 72.
 (pdftex.def)             Requested size: 142.26378pt x 109.42587pt.
 
 
@@ -394,7 +394,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.80 \\A
+l.77 \\A
         s comparing method 1 and 2, we noticed generally SVC has better accu...
 
 Your command was ignored.
@@ -402,14 +402,14 @@ Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 80--85
+Underfull \hbox (badness 10000) in paragraph at lines 77--82
 
  []
 
 ! Undefined control sequence.
 \@thehead ->\slugmaster 
                         
-l.85 \begin{center}
+l.82 \begin{center}
                    
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -432,37 +432,32 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.97   \begin{tablenotes}
+l.94   \begin{tablenotes}
                          
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 
-! LaTeX Error: \begin{center} on input line 85 ended by \end{tablenotes}.
+! LaTeX Error: \begin{center} on input line 82 ended by \end{tablenotes}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.100   \end{tablenotes}
-                        
+l.97   \end{tablenotes}
+                       
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 104--112
+Underfull \hbox (badness 10000) in paragraph at lines 101--108
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 104--112
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 104--112
+Underfull \hbox (badness 10000) in paragraph at lines 101--108
 
  []
 
@@ -475,22 +470,62 @@ File: ../fig/harmonic_percussiv_mfcc_nolog.png Graphic file (type png)
 
 <use ../fig/harmonic_percussiv_mfcc_nolog.png>
 Package pdftex.def Info: ../fig/harmonic_percussiv_mfcc_nolog.png used on input
- line 116.
+ line 111.
 (pdftex.def)             Requested size: 311.17162pt x 155.58699pt.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.115 \\I
+         n figure 4.2, not just the differences in harmonic and percussive p...
+
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
 <../fig/HP_deltas1.png, id=45, 1084.05pt x 433.62pt>
 File: ../fig/HP_deltas1.png Graphic file (type png)
 
 <use ../fig/HP_deltas1.png>
-Package pdftex.def Info: ../fig/HP_deltas1.png used on input line 123.
+Package pdftex.def Info: ../fig/HP_deltas1.png used on input line 119.
 (pdftex.def)             Requested size: 311.17162pt x 124.46959pt.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.123 \\T
+         ODOs
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
 <../fig/histogram_n1.png, id=46, 578.16pt x 433.62pt>
 File: ../fig/histogram_n1.png Graphic file (type png)
 
 <use ../fig/histogram_n1.png>
-Package pdftex.def Info: ../fig/histogram_n1.png used on input line 130.
+Package pdftex.def Info: ../fig/histogram_n1.png used on input line 127.
 (pdftex.def)             Requested size: 311.17162pt x 233.37718pt.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.131 \\T
+         ODOs
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
 
 ! LaTeX Error: Environment tablenotes undefined.
@@ -499,62 +534,62 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.145   \begin{tablenotes}
+l.142   \begin{tablenotes}
                           
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 
-! LaTeX Error: \begin{center} on input line 136 ended by \end{tablenotes}.
+Overfull \vbox (3.04993pt too high) has occurred while \output is active []
+
+
+[4 <../fig/harmonic_percussiv_mfcc_nolog.png> <../fig/HP_deltas1.png>]
+
+! LaTeX Error: \begin{center} on input line 133 ended by \end{tablenotes}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.148   \end{tablenotes}
+l.145   \end{tablenotes}
                         
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 
-Overfull \hbox (57.66223pt too wide) in paragraph at lines 152--153
+Overfull \hbox (63.13724pt too wide) in paragraph at lines 149--150
 []\OT1/cmr/m/sc/9 Low pass fil-ter by FFT con-vo-lu-tion\OT1/cmr/m/n/9 , \OT1/c
 mr/m/it/9 http://www.dsprelated.com/freebooks/sasp/Example[]1[]Low[]Pass[]Filte
 ring.html 
  []
 
 
-Overfull \hbox (8.76796pt too wide) in paragraph at lines 153--154
+Overfull \hbox (14.24297pt too wide) in paragraph at lines 150--151
 []\OT1/cmr/m/sc/9 Multiscale Scat-ter-ing for Au-dio Clas-si-fi-ca-tions\OT1/cm
 r/m/n/9 , \OT1/cmr/m/it/9 http://www.cmap.polytechnique.fr/scattering/ismir-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 154--155
+Underfull \hbox (badness 10000) in paragraph at lines 151--152
 []\OT1/cmr/m/sc/9 Digital im-age pro-cess-ing: p067- Dic-tio-nary Learn-ing\OT1
 /cmr/m/n/9 ,
  []
 
-
-Overfull \vbox (3.04993pt too high) has occurred while \output is active []
-
-
-[4 <../fig/harmonic_percussiv_mfcc_nolog.png> <../fig/HP_deltas1.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 161.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 158.
 
 Overfull \vbox (3.04993pt too high) has occurred while \output is active []
 
 
 [5 <../fig/histogram_n1.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 161.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 158.
  (./finalReport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 161.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 161.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 158.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 158.
 Package rerunfilecheck Info: File `finalReport.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 161.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 158.
  ) 
 Here is how much of TeX's memory you used:
  6896 strings out of 493089
@@ -563,7 +598,7 @@ Here is how much of TeX's memory you used:
  10303 multiletter control sequences out of 15000+600000
  10202 words of font info for 36 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 44i,10n,47p,1735b,447s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,10n,47p,1735b,418s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pf
 b></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 ></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
@@ -580,7 +615,7 @@ live/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texli
 ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive
 /2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2
 015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on finalReport.pdf (5 pages, 1127599 bytes).
+Output written on finalReport.pdf (5 pages, 1128219 bytes).
 PDF statistics:
  126 PDF objects out of 1000 (max. 8388607)
  92 compressed objects within 1 object stream
