@@ -76,7 +76,6 @@ where $x_{i}$ and $c_{i,j}$ respectively denote the jth component of the descrip
 \\ 4. multi points MFCC + Kmeans + Concatenate VLAD + PCA + k nearest neighbor
 \\ 5. multi points MFCC + Kmeans + Concatenate VLAD + PCA + SVC
 \\ 6. one points MFCC + Kmeans + Concatenate VLAD + PCA + SVC
-
 \begin{figure}%
     \centering
     \subfloat[Baseline method 5]{{\includegraphics[width=5cm]{../fig/svcSplit1_svcNewVLAD200Iter.png} }}%
@@ -86,12 +85,16 @@ where $x_{i}$ and $c_{i,j}$ respectively denote the jth component of the descrip
     \label{fig:example}%
 \end{figure}
 
-\\As comparing method 1 and 2, we noticed generally SVC has better accuracy than KNN, but also at the cost of efficiency. This may due to the properity that SVC is using 1-vs-1 scheme for $n\_classes\times(n\_classes-1)/2$ times, which maybe more delicate than KNN. We have also tested the LinearSVC method, which is 1-vs-rest scheme. Generally speaking, the accuracy of LinearSVC is still better than KNN and slightly lower than SVC.
-\\By having the result from method 3 and compare to method 2, we noticed we cannot get any furthre improvement from method 3, and even the accuracy is decreased. This phenomenon is getting even worse when comparing the results from method 5 and 6. Therefore, we can clearly see treating the MFCC product as one point is definitely not a good method, and the possible explaination for this is probably due to we are fixing the sequencing meaning of feature representation into fixed order. For example a clip from Jazz genre may have the component of drum, guitar, and bass, and MFCC product gives us the features quantification at each time points. As we concatenate them with the fixed order, we are like telling the classifier the feature with this is order is belong to certain genre. However, the order of drump-guitar-bass or guitar-bass-drump should be equally considered as Jazz.
-\\As comparing the method4 versus method1 and method5 versus method2, we can see the accuracy increased, especially in method5. Our centroids are obtained from the Kmeans of our implementation with Kmean++ for initialization and maxIter=200 as stopping criteria. Then our cancatenate VLAD method is the accumulation of measurement of each residuals, which defined as the vecter differences between each feature points and center, and then instead of sum up all vectors, here we concatenate each residuals. This method gave us a significant accuracy improvement, and is very likely due to concatenate each residuals at the same level will keep the strong feature while still save the minority feature representations. For example, if now this song which belong to Jazz has strong drum-related feature but also contains some guitar and bass feature that are not strong but yet representative enough, summing them all up like what we did in method 1-3 will easily loss those minority features. An abstraction metaphor for this idea, which hugely inspired our next new feature extraction method, is like a onion. During each step of our pipeline, we can either treat the onion as a whole, which we might not know this onion has multi-layers or probably we even don't know know this is a onion because it looks like a apple, or we can peeling each of the layer out and concatenate each layer together. The peeling process will give us better understanding about this onion.
-\\In summary regarding to our current progress, which the pipeline described in method 5,our MFCC can reach to the accuracy of 70\%, which is comparible to previous finding.
-\\
-\begin{center}
+As comparing method 1 and 2, we noticed generally SVC has better accuracy than KNN, but also at the cost of efficiency. This may due to the properity that SVC is using 1-vs-1 scheme for $n\_classes\times(n\_classes-1)/2$ times, which maybe more delicate than KNN. We have also tested the LinearSVC method, which is 1-vs-rest scheme. Generally speaking, the accuracy of LinearSVC is still better than KNN and slightly lower than SVC.
+
+By having the result from method 3 and compare to method 2, we noticed we cannot get any furthre improvement from method 3, and even the accuracy is decreased. This phenomenon is getting even worse when comparing the results from method 5 and 6. Therefore, we can clearly see treating the MFCC product as one point is definitely not a good method, and the possible explaination for this is probably due to we are fixing the sequencing meaning of feature representation into fixed order. For example a clip from Jazz genre may have the component of drum, guitar, and bass, and MFCC product gives us the features quantification at each time points. As we concatenate them with the fixed order, we are like telling the classifier the feature with this is order is belong to certain genre. However, the order of drump-guitar-bass or guitar-bass-drump should be equally considered as Jazz.
+
+As comparing the method4 versus method1 and method5 versus method2, we can see the accuracy increased, especially in method5. Our centroids are obtained from the Kmeans of our implementation with Kmean++ for initialization and maxIter=200 as stopping criteria. Then our cancatenate VLAD method is the accumulation of measurement of each residuals, which defined as the vecter differences between each feature points and center, and then instead of sum up all vectors, here we concatenate each residuals. This method gave us a significant accuracy improvement, and is very likely due to concatenate each residuals at the same level will keep the strong feature while still save the minority feature representations. For example, if now this song which belong to Jazz has strong drum-related feature but also contains some guitar and bass feature that are not strong but yet representative enough, summing them all up like what we did in method 1-3 will easily loss those minority features. An abstraction metaphor for this idea, which hugely inspired our next new feature extraction method, is like a onion. During each step of our pipeline, we can either treat the onion as a whole, which we might not know this onion has multi-layers or probably we even don't know know this is a onion because it looks like a apple, or we can peeling each of the layer out and concatenate each layer together. The peeling process will give us better understanding about this onion.
+
+In summary regarding to our current progress, which the pipeline described in method 5,our MFCC can reach to the accuracy of 70\%, which is comparible to previous finding.
+
+\begin{table}[h!]
+\centering
   \begin{tabular}{ l || c | r }
     \hline
     Method Ids & Accuracy (\%) \\ \hline \hline
@@ -103,11 +106,9 @@ where $x_{i}$ and $c_{i,j}$ respectively denote the jth component of the descrip
     Method 6 & 33 \\ \hline
     \hline
   \end{tabular}
-  \begin{tablenotes}
-    \small
-    \item Methods of each baseline approaches and its corresponding accuracy.
-  \end{tablenotes}
-\end{center}
+\caption{Methods of each baseline approaches and its corresponding accuracy.}
+\label{table:1}
+\end{table}
 
 \section{New Feature Extraction Approaches}
 As our result from baseline approaches (best 70\%) yields is comparable to previouse finding using MFCC (best 71\%), we also, based on the fundation of best baseline approach, experimentally invent new methods trying to further improve the best accuracy as well as the robustness of parameter searching, and here we mainly focus on the improvement of feature extraction. In additional to regular mfcc, librosa provides harmonic and percussive seperation (librosa.effects.hpss), which the underline mechanism is the STFT-HPSS-ISTFT pipeline, and it ensures that the output waveforms have equal length to the input signal. Secondly, we are trying to use librosa delta method (librosa.feature.delta) to capture the first and second derivative information from harmonic and percussive signal. As we mentioned from previous baseline method, concatenating MFCC product and treating it as one point is fixing the signal sequecial meaning which will limit the freedom the classification. However, the signal transition at every monent might hiding clear feature representation, and, therefore, taking the signal derivative and treat it as feature representation points might be a useful method. The final approach is the scattering of HPSS, and this idea is probably inspired by the switch of Sum VLAD to Concatenate VLAD mentioned previously. We noticed even signal being splited to harmonic and percussive parts, there are still plenty of residue signal in each splits. For example, although being removed significantly, there are still noticable percussive components in the harmonic split, and vise versa. Therefore, here we performed second order HPSS scattering as the new feature extraction method.
@@ -128,13 +129,13 @@ As our result from baseline approaches (best 70\%) yields is comparable to previ
   \ENDFOR
 \end{algorithmic}
 \end{algorithm}
-
-\\Below are our new approaches:
+Below are our new approaches:
 \\ 1. HPSS + MFCC + method 5 in baseline approach
 \\ 2. HPSS w/ 1st delta w/ 2nd delta + MFCC + method 5 in baseline approach
 \\ 3. 2nd HPSS scattering + MFCC + method 5 in baseline approach
 \\
-\\From the original method mentioned in baseline approaches, now our method 1 can further reached to 77\% of accuracy. As shown in figure 4.1, we noticed the harmonic and percussiv seperation is essential as we make the spectrogram plot of each parts. From the spectrogram plot of original clip, certain time period in original clip looks just like normal but these peroids actually existing noticable differences between harmonic and percussive parts. Just like the onion metaphor mentioned previously, we believe peeling off the original clip and contcate each of parts followed by MFCC will give us more feature representation to understand this song. As the result of this approach, in the improvement of this approach not only increase the max accuracy to 77\%, but also improve the robustness of the search space. As we can see the row 2 in figure 4.3, the major peak of the search space now significantly shift from original accuracy of 50\% to 65\%. This implies this new feature extraction method can potentially release the computation time and guarantee a better accuracy.
+
+From the original method mentioned in baseline approaches, now our method 1 can further reached to 77\% of accuracy. As shown in figure 4.1, we noticed the harmonic and percussiv seperation is essential as we make the spectrogram plot of each parts. From the spectrogram plot of original clip, certain time period in original clip looks just like normal but these peroids actually existing noticable differences between harmonic and percussive parts. Just like the onion metaphor mentioned previously, we believe peeling off the original clip and contcate each of parts followed by MFCC will give us more feature representation to understand this song. As the result of this approach, in the improvement of this approach not only increase the max accuracy to 77\%, but also improve the robustness of the search space. As we can see the row 2 in figure 4.3, the major peak of the search space now significantly shift from original accuracy of 50\% to 65\%. This implies this new feature extraction method can potentially release the computation time and guarantee a better accuracy.
 
 \begin{figure}[!ht]
   \centering
@@ -142,7 +143,7 @@ As our result from baseline approaches (best 70\%) yields is comparable to previ
   \caption{MFCC spectrogram of original clip, harmonic, and percussiv parts}
 \end{figure}
 
-\\In figure 4.2, not just the differences in harmonic and percussive parts of original song clip, we can also see the apparent difference when we take 1-order and 2-order of feature.delta. Instead of the original clip and its derivative here we keep only the harmonic and percussive parts and its 1-order and 2-order derivative. Therefore, the feature point of each song clip will be 6 times more than baseline method 5. Although we are not sure whether it's meaningful to keep the derivative information, in figure 4.3 row 3, it turns out the result is still quite as well as its robustness in figure 4.3 improved when comparing to the best baseline method. As the derivative is taking the transient difference in a tiny time interval and turns out it looks like a meaningful representation, we assume the signal transition at each monent might still be a good representation of song.
+\\In figure 4.2, not just the differences in harmonic and percussive parts of original song clip, we can also see the apparent difference when we take 1-order and 2-order of feature.delta. Instead of the original clip and its derivative here we keep only the harmonic and percussive parts and its 1-order and 2-order derivative. Therefore, the feature point of each song clip will be 6 times more than baseline method 5. Although we are not sure whether it's meaningful to keep the derivative information, in figure 4.3 row 3, it turns out the result as well as its robustness are quite improved when comparing to the best baseline method. As the definition of derivative is taking the transient difference in a tiny time interval and turns out it looks like a meaningful representation, we assume the signal transition at each monent might still be a good representation of song.
 
 \begin{figure}[!ht]
   \centering
@@ -150,7 +151,7 @@ As our result from baseline approaches (best 70\%) yields is comparable to previ
   \caption{MFCC spectrogram of feature.delta from original clip, harmonic, and percussiv parts}
 \end{figure}
 
-\\TODOs
+\\As metionend in HPSS scattering algorithm for our feature extraction method 3, we performed 2-order HPSS and keep all those MFCC results, which will 14 times more representation points than baseling method. From figure 3.1 we can see all the accuracy representing by color of the points in the search space all turned reddish, which is also confirmed by the significant peak shift between row 1 and row 3 in figure 4.3. Moreover, feature extraction method 3 is even better than method 1 and 2. As we may see from figure 4.3, method 1 and 2 are wider gaussian distribution while the distributin of method 3 is narrower. Furthermore, the peak of method3 is shifted from approximate 60\% in method 1 and 2 to 65\%. In terms of the maximum accuracy, method 3 can have 79\% accuracy while it's 77\% and 76\% in method 1 and 2.
 
 \begin{figure}[!ht]
   \centering
@@ -158,22 +159,19 @@ As our result from baseline approaches (best 70\%) yields is comparable to previ
   \caption{Histogram of accuracy result from search space. Top row is baseline method 5, and the remaining rows are new feature extraction method 1, 2, and 3 respectively}
 \end{figure}
 
-\\TODOs
-
-\begin{center}
-  \begin{tabular}{ l || c | r }
-    \hline
-    Method Ids & Accuracy (\%) \\ \hline \hline
-    Method 1 & 77 \\ \hline
-    Method 2 & 76 \\ \hline
-    Method 3 & 79 \\ \hline
-    \hline
-  \end{tabular}
-  \begin{tablenotes}
-    \small
-    \item Methods of each new feature extraction approaches and its corresponding accuracy.
-  \end{tablenotes}
-\end{center}
+\begin{table}[h!]
+\centering
+\begin{tabular}{ l || c | r }
+      \hline
+      Method Ids & Accuracy (\%) \\ \hline \hline
+      Method 1 & 77 \\ \hline
+      Method 2 & 76 \\ \hline
+      Method 3 & 79 \\ \hline
+      \hline
+    \end{tabular}
+\caption{Methods of each new feature extraction approaches and its corresponding accuracy.}
+\label{table:1}
+\end{table}
 
 \begin{thebibliography}{10}
 \bibitem{fpf} {\sc Low pass filter by FFT convolution}, {\em http://www.dsprelated.com/freebooks/sasp/Example\_1\_Low\_Pass\_Filtering.html}
