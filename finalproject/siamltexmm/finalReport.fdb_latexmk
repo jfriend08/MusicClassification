@@ -1,12 +1,12 @@
 # Fdb version 3
-["pdflatex"] 1450928914 "finalReport.tex" "finalReport.pdf" "finalReport" 1450928914
+["pdflatex"] 1450929426 "finalReport.tex" "finalReport.pdf" "finalReport" 1450929456
   "../fig/HP_deltas1.png" 1450119093 107237 1bfebe9e7e864f72ec9e0c176e07d655 ""
   "../fig/harmonic_percussiv_mfcc_nolog.png" 1450104832 62219 2ab6e7054347f467d9eafd73c2727682 ""
   "../fig/histogram_n1.png" 1450664690 41175 538497cd7134535df5e6398ac15e6da4 ""
   "../fig/refAccr.png" 1450838685 83332 1e69a383f3b952c9ae8e29c3d8cdd6ae ""
   "../fig/svcFlatSplit1_ScatterHPMFCCNewVLAD.png" 1450664410 305585 7c619a48e36b4714358f8f3c24a3d29a ""
   "../fig/svcSplit1_svcNewVLAD200Iter.png" 1450059882 475892 18e37aa2c8f563f5b50775036bc16e47 ""
-  "./finalReport.out" 1450928836 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "./finalReport.out" 1450929426 0 d41d8cd98f00b204e9800998ecf8427e ""
   "/usr/local/texlive/2015/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "/usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmcsc10.tfm" 1136768653 1300 63a6111ee6274895728663cf4b4e7e81 ""
@@ -84,13 +84,13 @@
   "/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1432479641 1764542 91654ba72bdb667e84ea24f076ae16d8 ""
   "/usr/local/texlive/2015/texmf-var/web2c/pdftex/pdflatex.fmt" 1432479681 3849859 39a7d258195bde2394e244961601fbc5 ""
   "/usr/local/texlive/2015/texmf.cnf" 1432479636 577 0d611272082f3cdb8e80e09a3c69cf07 ""
-  "finalReport.aux" 1450928838 3136 265b006f94c45c9d705729e5933a3ea2 ""
-  "finalReport.out" 1450928836 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "finalReport.tex" 1450928912 17553 dbb960e5b4257acc248dc1771d636897 ""
+  "finalReport.aux" 1450929427 3136 873d20132ae0fc13a81bfe65017a1beb ""
+  "finalReport.out" 1450929426 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "finalReport.tex" 1450929424 17560 089e0502f47195aad03def42ae7b0cf3 ""
   "siam11.clo" 1296849544 6606 ef21d79492fd80b6cb0ce52363c609cf ""
   "siamltexmm.cls" 1450834962 33622 77bd88f01fbe7a463c5a3082b1137686 ""
   (generated)
-  "finalReport.aux"
+  "finalReport.pdf"
   "finalReport.log"
   "finalReport.out"
-  "finalReport.pdf"
+  "finalReport.aux"

@@ -71,13 +71,13 @@ To have our baseline approaches reaching similar accuracy as the previous findin
 c_{i, j} = \sum\limits_{x such that NN(x)=c_{i}} x_{i}-c_{i,j}
 \end{equation}
 where $x_{i}$ and $c_{i,j}$ respectively denote the jth component of the descriptor x considered and of its corresponding visual word $c_{i}$. We was wondering what if we sum up all the result into just d-dimension instead of the original VLAD representation $D=k\times d$, where k and d are the number of centroids and dimension of each centroid. Therefore, we named these two VLAD methods as Sum VLAD and Concatenate VLAD, and due to high dimension of Concatenate VLAD, we then perforemed PCA with whitening for dimension reduction.
-\\\\As the results of the questions mentioned previously, we performed the folloing appraoches to reach the questions, with the search space of number of clip, number of centroids, batch size, and C or n\_neighbor for SVC or KNN classifier:\\
+\\\\As the results of the questions mentioned previously, we performed the folloing appraoches to reach the questions, with the search space of number of clip, number of centroids, batch size, and C or n\_neighbor for SVC or KNN classifier:
 \\ 1. multi points MFCC + Kmeans + Sum VLAD + k nearest neighbor
 \\ 2. multi points MFCC + Kmeans + Sum VLAD + SVC
 \\ 3. one point MFCC + Kmeans + Sum VLAD + SVC
 \\ 4. multi points MFCC + Kmeans + Concatenate VLAD + PCA + k nearest neighbor
 \\ 5. multi points MFCC + Kmeans + Concatenate VLAD + PCA + SVC
-\\ 6. one points MFCC + Kmeans + Concatenate VLAD + PCA + SVC\\
+\\ 6. one points MFCC + Kmeans + Concatenate VLAD + PCA + SVC
 \begin{figure}%
     \centering
     \subfloat[Baseline method 5]{{\includegraphics[width=5cm]{../fig/svcSplit1_svcNewVLAD200Iter.png} }}%
@@ -134,10 +134,9 @@ As our result from baseline approaches (best 70\%) yields is comparable to previ
 Below are our new approaches:
 \\ 1. HPSS + MFCC + method 5 in baseline approach
 \\ 2. HPSS w/ 1st delta w/ 2nd delta + MFCC + method 5 in baseline approach
-\\ 3. 2nd HPSS scattering + MFCC + method 5 in baseline approach
-\\
+\\ 3. 2nd HPSS scattering + MFCC + method 5 in baseline approach\\
 
-From the original method mentioned in baseline approaches, now our method 1 can further reached to 77\% of accuracy (Table 3.1). As shown in figure 3.1, we noticed the harmonic and percussiv seperation is essential as we make the spectrogram plot of each parts. From the spectrogram plot of original clip, certain time period in original clip looks just like normal but these peroids actually existing noticable differences between harmonic and percussive parts. Just like the onion metaphor mentioned previously, we believe peeling off the original clip and contcate each of parts followed by MFCC will give us more feature representation to understand this song. As the result of this approach, in the improvement of this approach not only increase the max accuracy to 77\%, but also improve the robustness of the search space. As we can see the row 2 in figure 3.3, the major peak of the search space now significantly shift from original accuracy of 50\% to 65\%. This implies this new feature extraction method can potentially release the computation time and guarantee a better accuracy.
+From the original method mentioned in baseline approaches, now our method 1 can further reached to 77\% of accuracy (Table 3.1). As shown in figure 3.1, we noticed the harmonic and percussiv seperation is essential as we make the spectrogram plot of each parts. From the spectrogram plot of original clip, certain time period in original clip looks just like normal but these peroids actually existing noticable differences between harmonic and percussive parts. Just like the onion metaphor mentioned previously, we believe peeling off the original clip and contcate each of parts followed by MFCC will give us more feature representation to understand this song. As the result of this approach, in the improvement of this approach not only increase the max accuracy to 77\%, but also improve the robustness of the search space. As we can see the row 2 in figure 3.3, the major peak of the search space now significantly shift from original accuracy of 50\% to 60\%. This implies this new feature extraction method can potentially release the computation time and guarantee a better accuracy.
 
 \begin{figure}[!ht]
   \centering
@@ -153,7 +152,7 @@ From the original method mentioned in baseline approaches, now our method 1 can 
   \caption{MFCC spectrogram of feature.delta from original clip, harmonic, and percussiv parts}
 \end{figure}
 
-\\As metionend in HPSS scattering algorithm for our feature extraction method 3, we performed 2-order HPSS and keep all those MFCC results, which will 14 times more representation points than baseling method. From figure 3.1 we can see all the accuracy representing by color of the points in the search space all turned reddish, which is also confirmed by the significant peak shift between row 1 and row 3 in figure 3.3. Moreover, feature extraction method 3 is even better than method 1 and 2. As we may see from figure 3.3, method 1 and 2 are wider gaussian distribution while the distributin of method 3 is narrower. Furthermore, the peak of method3 is shifted from approximate 60\% in method 1 and 2 to 65\%. In terms of the maximum accuracy, method 3 can have 79\% accuracy while it's 77\% and 76\% in method 1 and 2.
+\\As metionend in HPSS scattering algorithm for our feature extraction method 3, we performed 2-order HPSS and keep all those MFCC results, which will 14 times more representation points than baseling method. From figure 3.1 we can see all the accuracy representing by color of the points in the search space all turned reddish, which is also confirmed by the significant peak shift between row 1 and row 4 in figure 3.3. Moreover, feature extraction method 3 is even better than method 1 and 2. As we may see from figure 3.3, method 1 and 2 are wider gaussian distribution while the distributin of method 3 is narrower. Furthermore, the peak of method3 is shifted from approximate 60\% in method 1 and 2 to 65\%. In terms of the maximum accuracy, method 3 can have 79\% accuracy while it's 77\% and 76\% in method 1 and 2 (Table 3.1).
 
 \begin{figure}[!ht]
   \centering
