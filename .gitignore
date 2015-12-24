@@ -9,3 +9,7 @@ update.pbs
 data_small_correctFormat.in
 .ipynb_checkpoints
 *_songs.in
+
+!finalproject/results/*
+!finalproject/results_svc/*
+
